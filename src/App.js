@@ -42,18 +42,15 @@ class App extends Component {
     return (
       <div className="App">
         <h2>Stories</h2>
-
-        {stories.map(function(item) {
-          return (
-            <div key={item.id}>
-              <a href={item.url}>{item.title}</a>
-              <p>by: {item.by} </p>
-              <p>comments: {item.descendants}</p>
-              <p>score: {item.score}</p>
-              <hr/>
-            </div>
-          )
-        })}
+        {stories.map(item =>
+          <div key={item.id}>
+            <a href={item.url}>{item.title}</a>
+            <p>by: {item.by} </p>
+            <p>comments: {item.descendants}</p>
+            <p>score: {item.score}</p>
+            <hr/>
+          </div>
+        )}
       </div>
     );
   }
