@@ -38,16 +38,42 @@ const stories = [
 ];
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      stories,
+    };
+
+    this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onDismiss(id) {
+    const isNotId = item => item.id !== id;
+    const updatedStories = this.state.stories.filter(isNotId);
+    this.setState({ stories: updatedStories})
+  }
+
   render() {
     return (
       <div className="App">
         <h2>Stories</h2>
-        {stories.map(item =>
+        {this.state.stories.map(item =>
           <div key={item.id}>
             <a href={item.url}>{item.title}</a>
             <p>by: {item.by} </p>
             <p>comments: {item.descendants}</p>
             <p>score: {item.score}</p>
+
+            <span>
+              <button
+                onClick={() => this.onDismiss(item.id)}
+                type="button"
+              >
+                X
+              </button>
+            </span>
+
             <hr/>
           </div>
         )}
