@@ -37,15 +37,29 @@ const stories = [
   },
 ];
 
+
+function isSearched(searchTerm) {
+  return function(item) {
+    return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+  }
+}
+
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       stories,
+      searchTerm: '',
     };
 
+    this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value });
   }
 
   onDismiss(id) {
@@ -57,8 +71,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
+        <form>
+            <p>filter by term: <input
+              type="text"
+              onChange={this.onSearchChange}
+            />
+          </p>
+        </form>
+
         <h2>Stories</h2>
-        {this.state.stories.map(item =>
+          {this.state.stories.filter(isSearched(this.state.searchTerm)).map(item =>
           <div key={item.id}>
             <a href={item.url}>{item.title}</a>
             <p>by: {item.by} </p>
