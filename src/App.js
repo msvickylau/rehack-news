@@ -69,25 +69,26 @@ class App extends Component {
   }
 
   render() {
+    const { searchTerm, stories } = this.state;
+
     return (
       <div className="App">
-
         <form>
             <p>filter by term: <input
               type="text"
+              value={searchTerm}
               onChange={this.onSearchChange}
             />
           </p>
         </form>
 
         <h2>Stories</h2>
-          {this.state.stories.filter(isSearched(this.state.searchTerm)).map(item =>
+          {stories.filter(isSearched(searchTerm)).map(item =>
           <div key={item.id}>
             <a href={item.url}>{item.title}</a>
             <p>by: {item.by} </p>
             <p>comments: {item.descendants}</p>
             <p>score: {item.score}</p>
-
             <span>
               <button
                 onClick={() => this.onDismiss(item.id)}
@@ -96,7 +97,6 @@ class App extends Component {
                 X
               </button>
             </span>
-
             <hr/>
           </div>
         )}
