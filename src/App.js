@@ -73,17 +73,45 @@ class App extends Component {
 
     return (
       <div className="App">
-        <form>
-            <p>filter by term: <input
-              type="text"
-              value={searchTerm}
-              onChange={this.onSearchChange}
-            />
-          </p>
-        </form>
+        <Search
+          value={searchTerm}
+          onChange={this.onSearchChange}
+        />
+        <Table
+          stories={stories}
+          pattern={searchTerm}
+          onDismiss={this.onDismiss}
+        />
+      </div>
+    );
+  }
+}
 
-        <h2>Stories</h2>
-          {stories.filter(isSearched(searchTerm)).map(item =>
+
+
+class Search extends Component {
+  render() {
+    const { value, onChange } = this.props;
+    return (
+      <form>
+        <span>filter by term: </span>
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+        />
+        <hr/>
+      </form>
+    );
+  }
+}
+
+class Table extends Component {
+  render() {
+    const { stories, pattern, onDismiss } = this.props;
+    return (
+      <div>
+        {stories.filter(isSearched(pattern)).map(item =>
           <div key={item.id}>
             <a href={item.url}>{item.title}</a>
             <p>by: {item.by} </p>
