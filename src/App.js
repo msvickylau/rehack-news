@@ -118,9 +118,9 @@ class Table extends Component {
             <p>comments: {item.descendants}</p>
             <p>score: {item.score}</p>
             <span>
-              <button onClick={() => onDismiss(item.id)}>
+              <Button onClick={() => onDismiss(item.id)}>
                 X
-              </button>
+              </Button>
             </span>
             <hr/>
           </div>
