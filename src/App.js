@@ -90,64 +90,41 @@ class App extends Component {
 
 
 
-class Search extends Component {
-  render() {
-    const { value, onChange, children } = this.props;
-    return (
-      <form>
-        {children} <input
-          type="text"
-          value={value}
-          onChange={onChange}
-        />
+const Search = ({ value, onChange, children }) =>
+  <form>
+    {children} <input
+      type="text"
+      value={value}
+      onChange={onChange}
+    />
+  </form>
+
+
+const Table = ({ stories, pattern, onDismiss }) =>
+  <div>
+    {stories.filter(isSearched(pattern)).map(item =>
+      <div key={item.id}>
+        <a href={item.url}>{item.title}</a>
+        <p>by: {item.by} </p>
+        <p>comments: {item.descendants}</p>
+        <p>score: {item.score}</p>
+        <span>
+          <Button onClick={() => onDismiss(item.id)}>
+            X
+          </Button>
+        </span>
         <hr/>
-      </form>
-    );
-  }
-}
-
-class Table extends Component {
-  render() {
-    const { stories, pattern, onDismiss } = this.props;
-    return (
-      <div>
-        {stories.filter(isSearched(pattern)).map(item =>
-          <div key={item.id}>
-            <a href={item.url}>{item.title}</a>
-            <p>by: {item.by} </p>
-            <p>comments: {item.descendants}</p>
-            <p>score: {item.score}</p>
-            <span>
-              <Button onClick={() => onDismiss(item.id)}>
-                X
-              </Button>
-            </span>
-            <hr/>
-          </div>
-        )}
       </div>
-    );
-  }
-}
+    )}
+  </div>
 
-class Button extends Component {
-  render() {
-    const {
-      onClick,
-      className= '',
-      children,
-    } = this.props;
-
-    return (
-      <button
-        onClick={onClick}
-        classname={className}
-        type="button"
-      >
-        {children}
-      </button>
-    )
-  }
-}
+const Button = ({ onClick, className= '', children }) =>
+  <button
+    onClick={onClick}
+    classname={className}
+    type="button"
+  >
+    {children}
+  </button>
 
 export default App;
