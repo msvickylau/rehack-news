@@ -70,13 +70,14 @@ class App extends Component {
 
   render() {
     const { searchTerm, stories } = this.state;
-
     return (
       <div className="App">
         <Search
           value={searchTerm}
           onChange={this.onSearchChange}
-        />
+        >
+          filter by term:
+        </Search>
         <Table
           stories={stories}
           pattern={searchTerm}
@@ -91,11 +92,10 @@ class App extends Component {
 
 class Search extends Component {
   render() {
-    const { value, onChange } = this.props;
+    const { value, onChange, children } = this.props;
     return (
       <form>
-        <span>filter by term: </span>
-        <input
+        {children} <input
           type="text"
           value={value}
           onChange={onChange}
@@ -118,10 +118,7 @@ class Table extends Component {
             <p>comments: {item.descendants}</p>
             <p>score: {item.score}</p>
             <span>
-              <button
-                onClick={() => this.onDismiss(item.id)}
-                type="button"
-              >
+              <button onClick={() => onDismiss(item.id)}>
                 X
               </button>
             </span>
@@ -130,6 +127,26 @@ class Table extends Component {
         )}
       </div>
     );
+  }
+}
+
+class Button extends Component {
+  render() {
+    const {
+      onClick,
+      className= '',
+      children,
+    } = this.props;
+
+    return (
+      <button
+        onClick={onClick}
+        classname={className}
+        type="button"
+      >
+        {children}
+      </button>
+    )
   }
 }
 
