@@ -17,17 +17,19 @@ const stories = [
   {
     "by" : "dhouston",
     "descendants" : 2,
+    "rank": 1,
     "id" : 0,
     "kids" : [11, 12],
     "score" : 6,
     "time" : 1175714200,
     "title" : "My YC app: Dropbox",
     "type" : "story",
-    "url" : "http://www.getdropbox.com/u/2/screencast.html"
+    "url" : "http://www.getdropbox.com/"
   },
   {
     "by" : "probable",
     "descendants" : 1,
+    "rank": 2,
     "id" : 1,
     "kids" : [13],
     "score" : 2,
@@ -72,7 +74,7 @@ class App extends Component {
   render() {
     const { searchTerm, stories } = this.state;
     return (
-      <div>
+      <BodyStyle>
         <div>
           <Search
             value={searchTerm}
@@ -86,7 +88,7 @@ class App extends Component {
           pattern={searchTerm}
           onDismiss={this.onDismiss}
         />
-      </div>
+      </BodyStyle>
     );
   }
 }
@@ -103,29 +105,28 @@ const Search = ({ value, onChange, children }) =>
 
 const Table = ({ stories, pattern, onDismiss }) =>
   <div className="table">
+    <WrapperBar>
+      <RankContainerBar>RANK</RankContainerBar>
+      <ScoreContainerBar>PTs</ScoreContainerBar>
+      <CommentsButtonBar>CMTs</CommentsButtonBar>
+      <StoryContainerBar>STORY</StoryContainerBar>
+    </WrapperBar>
     {stories.filter(isSearched(pattern)).map(item =>
       <div key={item.id}>
-
         <Wrapper>
-
-          <RankContainer>1</RankContainer>
+          <RankContainer>{item.rank}</RankContainer>
           <ScoreContainer>{item.score}</ScoreContainer>
+          <CommentsButton>{item.descendants}</CommentsButton>
 
           <StoryContainer>
-            <TitleLink><a href={item.url}>{item.title}</a></TitleLink>
-            <FooterWrapper>
-              <span>By: {item.by}</span>
-              <span>By: {item.time}</span>
-            </FooterWrapper>
+            <TitleLink href={item.url}>{item.title}</TitleLink>
+            <FooterLink href={item.url}>{item.url}</FooterLink>
           </StoryContainer>
 
-          <CommentContainer>{item.descendants}</CommentContainer>
-
-          <Button onClick={() => onDismiss(item.id)}>
-            X
-          </Button>
+          <XButton onClick={() => onDismiss(item.id)}>
+            &#10006;
+          </XButton>
         </Wrapper>
-
       </div>
     )}
   </div>
@@ -139,76 +140,154 @@ const Button = ({ onClick, className= '', children }) =>
     {children}
   </button>
 
-const Wrapper = styled.div`
-  border: 2px solid red;  /* For debugging */
+
+
+const BodyStyle = styled.div`
+  background-color: #f5f5f5;
+`
+
+/////////////////// BAR ///////////////////
+const WrapperBar = styled.div`
+  /* border: 1px solid red;  /* For debugging */
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 10px;
+  align-items: center;
 `;
-
-const ScoreContainer = styled.div`
-  background-color: #ffb74d;
-  height: 2em;
-  width: 2em;
+const NumberContainerBar = styled.div`
+  background-color: #000000;
+  height: 1.3rem;
+  width: 2rem;
+  min-width: 2rem;
+  line-height: 1.3rem;
   border-radius: 0.25rem;
-  font-size: 14pt;
+  font-size: 10px;
   color: #fff;
   text-align: center;
   vertical-align: middle;
-  line-height: 2em;
+  margin-right: 15px;
+  font-weight: bold;
+`;
+const RankContainerBar = styled(NumberContainerBar)`
+  background-color: #f57c00;
+`;
+const ScoreContainerBar = styled(NumberContainerBar)`
+  background-color: #ff9800;
+`;
+const CommentsButtonBar = styled(NumberContainerBar)`
+  background-color: #ffb74d;
 `;
 
-const CommentContainer = styled.button`
-  background-color: #222;
-  border-color: #F39C12;
-  border: 1;
-    -webkit-box-shadow: 0 0 0 0.1rem;
-  height: 2em;
-  width: 2em;
+const StoryContainerBar = styled.div`
+  border: 1px solid blue;  /* For debugging */
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 15px;
+  flex-shrink: 1;
+  align-items: flex-start;
+  font-size: 10px;
+  font-weight: bold;
+`;
+
+
+/////////////////// MAIN ///////////////////
+const Wrapper = styled.div`
+  /* border: 1px solid red;  /* For debugging */
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  background-color: #FFF;
+`;
+
+const NumberContainer = styled.div`
+  background-color: #000000;
+  height: 2rem;
+  width: 2rem;
+  min-width: 2rem;
+  line-height: 2rem;
   border-radius: 0.25rem;
-  font-size: 14pt;
-  color: #F39C12;
+  font-size: 18px;
+  color: #fff;
   text-align: center;
   vertical-align: middle;
-  line-height: 2em;
+  margin-right: 15px;
+`;
+const RankContainer = styled(NumberContainer)`
+  background-color: #f57c00;
+`;
+const ScoreContainer = styled(NumberContainer)`
+  background-color: #ff9800;
+`;
+
+const CommentsButton = styled.button`
+  background-color: #ffb74d;
+  height: 2rem;
+  width: 2rem;
+  min-width: 2rem;
+  line-height: 2rem;
+  border: transparent;
+  border-radius: 0.25rem;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 15px;
   &:hover{
-    background-color: #F39C12;
-    color: #222;
+    background-color: #f57c00;
   }
 `;
 
+const XButton = styled(Button)`
+  background-color: #FFF;
+  height: 1.6rem;
+  width: 1.6rem;
+  line-height: 1.6rem;
+  border: transparent;
+  border-radius: 1rem;
+  align-items: center;
+
+  color: #424242;
+  font-size: .8rem;
+
+  &:hover{
+    background-color: #f57c00;
+    color: #FFF;
+  }
+`
+
+/////////////////// Story Component ///////////////////
 const StoryContainer = styled.div`
-  border: 2px solid blue;  /* For debugging */
+  /* border: 1px solid blue;  /* For debugging */
   display: flex;
-  flex-grow: 2;
-  justify-content: left;
+  flex-grow: 1;
   flex-direction: column;
+  justify-content: space-between;
+  margin-right: 15px;
+  flex-shrink: 1;
+  align-items: flex-start;
 `;
 
-
-const RankContainer = styled.div`
-  background-color: #ff9800;
-  height: 2em;
-  width: 2em;
-  border-radius: 0.25rem;
-  font-size: 14pt;
-  color: #fff;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 2em;
+const TitleLink = styled.a.attrs({
+  target: "_blank",
+  rel: "noopener"
+})`
+  color: #424242;
+  font-weight: bold;
+  font-size: 15px;
 `;
 
-const TitleLink = styled.div`
-  border: 1px solid red;  /* For debugging */
-  font-size: 10pt;
-  display: flex;
-`;
-
-const FooterWrapper = styled.div`
-  border: 1px solid green;  /* For debugging */
-  font-size: 8pt;
+const FooterLink = styled.a.attrs({
+  target: "_blank",
+  rel: "noopener"
+})`
   color: #828282;
-  display: flex;
+  font-size: .25rem;
+  text-decoration: none;
+  margin: 0px 3px;
 `;
+
 
 export default App;
