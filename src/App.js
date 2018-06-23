@@ -21,7 +21,7 @@ const stories = [
     "kids" : [11, 12],
     "score" : 6,
     "time" : 1175714200,
-    "title" : "My YC app: Dropbox - Throw away your USB drive",
+    "title" : "My YC app: Dropbox",
     "type" : "story",
     "url" : "http://www.getdropbox.com/u/2/screencast.html"
   },
@@ -141,9 +141,9 @@ const Button = ({ onClick, className= '', children }) =>
 
 const Wrapper = styled.div`
   border: 2px solid red;  /* For debugging */
-  padding: 10px 0;
   display: flex;
   justify-content: space-between;
+  padding: 20px 0;
 `;
 
 const ScoreContainer = styled.div`
@@ -200,7 +200,7 @@ const RankContainer = styled.div`
 
 const TitleLink = styled.div`
   border: 1px solid red;  /* For debugging */
-  font-size: 11pt;
+  font-size: 10pt;
   display: flex;
 `;
 
