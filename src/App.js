@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import styled from 'styled-components';
 
 
 // https://github.com/HackerNews/API
@@ -71,13 +72,15 @@ class App extends Component {
   render() {
     const { searchTerm, stories } = this.state;
     return (
-      <div className="App">
-        <Search
-          value={searchTerm}
-          onChange={this.onSearchChange}
-        >
-          filter by term:
-        </Search>
+      <div>
+        <div>
+          <Search
+            value={searchTerm}
+            onChange={this.onSearchChange}
+          >
+            filter by term:
+          </Search>
+        </div>
         <Table
           stories={stories}
           pattern={searchTerm}
@@ -87,8 +90,6 @@ class App extends Component {
     );
   }
 }
-
-
 
 const Search = ({ value, onChange, children }) =>
   <form>
@@ -101,19 +102,30 @@ const Search = ({ value, onChange, children }) =>
 
 
 const Table = ({ stories, pattern, onDismiss }) =>
-  <div>
+  <div className="table">
     {stories.filter(isSearched(pattern)).map(item =>
       <div key={item.id}>
-        <a href={item.url}>{item.title}</a>
-        <p>by: {item.by} </p>
-        <p>comments: {item.descendants}</p>
-        <p>score: {item.score}</p>
-        <span>
+
+        <Wrapper>
+
+          <RankContainer>1</RankContainer>
+          <ScoreContainer>{item.score}</ScoreContainer>
+
+          <StoryContainer>
+            <TitleLink><a href={item.url}>{item.title}</a></TitleLink>
+            <FooterWrapper>
+              <span>By: {item.by}</span>
+              <span>By: {item.time}</span>
+            </FooterWrapper>
+          </StoryContainer>
+
+          <CommentContainer>{item.descendants}</CommentContainer>
+
           <Button onClick={() => onDismiss(item.id)}>
             X
           </Button>
-        </span>
-        <hr/>
+        </Wrapper>
+
       </div>
     )}
   </div>
@@ -121,10 +133,82 @@ const Table = ({ stories, pattern, onDismiss }) =>
 const Button = ({ onClick, className= '', children }) =>
   <button
     onClick={onClick}
-    classname={className}
+    className={className}
     type="button"
   >
     {children}
   </button>
+
+const Wrapper = styled.div`
+  border: 2px solid red;  /* For debugging */
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ScoreContainer = styled.div`
+  background-color: #ffb74d;
+  height: 2em;
+  width: 2em;
+  border-radius: 0.25rem;
+  font-size: 14pt;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2em;
+`;
+
+const CommentContainer = styled.button`
+  background-color: #222;
+  border-color: #F39C12;
+  border: 1;
+    -webkit-box-shadow: 0 0 0 0.1rem;
+  height: 2em;
+  width: 2em;
+  border-radius: 0.25rem;
+  font-size: 14pt;
+  color: #F39C12;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2em;
+  &:hover{
+    background-color: #F39C12;
+    color: #222;
+  }
+`;
+
+const StoryContainer = styled.div`
+  border: 2px solid blue;  /* For debugging */
+  display: flex;
+  flex-grow: 2;
+  justify-content: left;
+  flex-direction: column;
+`;
+
+
+const RankContainer = styled.div`
+  background-color: #ff9800;
+  height: 2em;
+  width: 2em;
+  border-radius: 0.25rem;
+  font-size: 14pt;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2em;
+`;
+
+const TitleLink = styled.div`
+  border: 1px solid red;  /* For debugging */
+  font-size: 11pt;
+  display: flex;
+`;
+
+const FooterWrapper = styled.div`
+  border: 1px solid green;  /* For debugging */
+  font-size: 8pt;
+  color: #828282;
+  display: flex;
+`;
 
 export default App;
