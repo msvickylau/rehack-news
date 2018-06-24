@@ -8,12 +8,6 @@ const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 
-function isSearched(searchTerm) {
-  return function(item) {
-    return item.title.toLowerCase().includes(searchTerm.toLowerCase());
-  }
-}
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +17,9 @@ class App extends Component {
     };
 
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
+    this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
   }
 
@@ -31,17 +27,25 @@ class App extends Component {
     this.setState({ result });
   }
 
-  componentDidMount() {
-    const { searchTerm } = this.state;
-
+  fetchSearchTopStories(searchTerm) {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
       .catch(error => error);
   }
 
+  componentDidMount() {
+    const { searchTerm } = this.state; this.fetchSearchTopStories(searchTerm);
+  }
+
   onSearchChange(event) {
     this.setState({ searchTerm: event.target.value });
+  }
+
+  onSearchSubmit(event) {
+    const { searchTerm } = this.state;
+    this.fetchSearchTopStories(searchTerm);
+    event.preventDefault();
   }
 
   onDismiss(id) {
@@ -54,23 +58,23 @@ class App extends Component {
 
   render() {
     const { searchTerm, result } = this.state;
-    if (!result) { return null; }
-
     return (
       <BodyStyle>
         <div>
           <Search
             value={searchTerm}
             onChange={this.onSearchChange}
+            onSubmit={this.onSearchSubmit}
           >
-            filter by term:
+            search
           </Search>
         </div>
-        <Table
-          stories={result.hits}
-          pattern={searchTerm}
-          onDismiss={this.onDismiss}
-        />
+        { result &&
+          <Table
+            stories={result.hits}
+            onDismiss={this.onDismiss}
+          />
+        }
       </BodyStyle>
     );
   }
@@ -78,27 +82,37 @@ class App extends Component {
 export default App;
 
 
-const Search = ({ value, onChange, children }) =>
-  <form>
-    {children} <input
+const Search = ({
+  value,
+  onChange,
+  onSubmit,
+  children
+}) =>
+  <form onSubmit={onSubmit}>
+    <input
       type="text"
       value={value}
       onChange={onChange}
     />
-  </form>
+    <button type="submit">
+      {children}
+    </button>
+</form>
 
 
-const Table = ({ stories, pattern, onDismiss }) =>
+const Table = ({ stories, onDismiss }) =>
   <div className="table">
     <WrapperBar>
+      {/* // eslint-disable-next-line */}
       {/* <RankContainerBar>RANK</RankContainerBar> */}
       <PointsContainerBar>PTs</PointsContainerBar>
       <CommentsButtonBar>CMTs</CommentsButtonBar>
       <StoryContainerBar>STORY</StoryContainerBar>
     </WrapperBar>
-    {stories.filter(isSearched(pattern)).map(item =>
+    {stories.map(item =>
       <div key={item.objectID}>
         <Wrapper>
+          {/* // eslint-disable-next-line */}
           {/* <RankContainer>{item.rank}</RankContainer> */}
           <PointsContainer>{item.points}</PointsContainer>
           <CommentsButton>{item.num_comments}</CommentsButton>
@@ -154,6 +168,7 @@ const NumberContainerBar = styled.div`
   margin-right: 15px;
   font-weight: bold;
 `;
+// eslint-disable-next-line
 const RankContainerBar = styled(NumberContainerBar)`
   background-color: #f57c00;
 `;
@@ -202,6 +217,7 @@ const NumberContainer = styled.div`
   vertical-align: middle;
   margin-right: 15px;
 `;
+// eslint-disable-next-line
 const RankContainer = styled(NumberContainer)`
   background-color: #f57c00;
 `;
