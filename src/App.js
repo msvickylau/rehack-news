@@ -2,44 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
 
+const DEFAULT_QUERY = 'hello';
 
-// https://github.com/HackerNews/API
-// by	  The username of the item's author.
-// descendants	 In the case of stories or polls, the total comment count.
-// id	  The item's unique id.
-// kids	  The ids of the item's comments, in ranked display order.
-// score	 The story's score, or the votes for a pollopt.
-// time	  Creation date of the item, in Unix Time.
-// title	 The title of the story, poll or job.
-// type	  The type of item. One of "job", "story", "comment", "poll", or "pollopt".
-// url	 The URL of the story.
-const stories = [
-  {
-    "by" : "dhouston",
-    "descendants" : 2,
-    "rank": 1,
-    "id" : 0,
-    "kids" : [11, 12],
-    "score" : 6,
-    "time" : 1175714200,
-    "title" : "My YC app: Dropbox",
-    "type" : "story",
-    "url" : "http://www.getdropbox.com/"
-  },
-  {
-    "by" : "probable",
-    "descendants" : 1,
-    "rank": 2,
-    "id" : 1,
-    "kids" : [13],
-    "score" : 2,
-    "time" : 1245744200,
-    "title" : "styled-components",
-    "type" : "story",
-    "url" : "https://www.styled-components.com/"
-  },
-];
-
+const PATH_BASE = 'https://hn.algolia.com/api/v1';
+const PATH_SEARCH = '/search';
+const PARAM_SEARCH = 'query=';
 
 function isSearched(searchTerm) {
   return function(item) {
@@ -47,18 +14,30 @@ function isSearched(searchTerm) {
   }
 }
 
-
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      stories,
-      searchTerm: '',
+      result: null,
+      searchTerm: DEFAULT_QUERY,
     };
 
+    this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  setSearchTopStories(result) {
+    this.setState({ result });
+  }
+
+  componentDidMount() {
+    const { searchTerm } = this.state;
+
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+      .then(response => response.json())
+      .then(result => this.setSearchTopStories(result))
+      .catch(error => error);
   }
 
   onSearchChange(event) {
@@ -66,13 +45,17 @@ class App extends Component {
   }
 
   onDismiss(id) {
-    const isNotId = item => item.id !== id;
-    const updatedStories = this.state.stories.filter(isNotId);
-    this.setState({ stories: updatedStories})
+    const isNotId = item => item.objectID !== id;
+    const updatedHits = this.state.result.hits.filter(isNotId);
+    this.setState({
+      result: { ...this.state.result, hits: updatedHits }
+    });
   }
 
   render() {
-    const { searchTerm, stories } = this.state;
+    const { searchTerm, result } = this.state;
+    if (!result) { return null; }
+
     return (
       <BodyStyle>
         <div>
@@ -84,7 +67,7 @@ class App extends Component {
           </Search>
         </div>
         <Table
-          stories={stories}
+          stories={result.hits}
           pattern={searchTerm}
           onDismiss={this.onDismiss}
         />
@@ -92,6 +75,8 @@ class App extends Component {
     );
   }
 }
+export default App;
+
 
 const Search = ({ value, onChange, children }) =>
   <form>
@@ -106,24 +91,24 @@ const Search = ({ value, onChange, children }) =>
 const Table = ({ stories, pattern, onDismiss }) =>
   <div className="table">
     <WrapperBar>
-      <RankContainerBar>RANK</RankContainerBar>
-      <ScoreContainerBar>PTs</ScoreContainerBar>
+      {/* <RankContainerBar>RANK</RankContainerBar> */}
+      <PointsContainerBar>PTs</PointsContainerBar>
       <CommentsButtonBar>CMTs</CommentsButtonBar>
       <StoryContainerBar>STORY</StoryContainerBar>
     </WrapperBar>
     {stories.filter(isSearched(pattern)).map(item =>
-      <div key={item.id}>
+      <div key={item.objectID}>
         <Wrapper>
-          <RankContainer>{item.rank}</RankContainer>
-          <ScoreContainer>{item.score}</ScoreContainer>
-          <CommentsButton>{item.descendants}</CommentsButton>
+          {/* <RankContainer>{item.rank}</RankContainer> */}
+          <PointsContainer>{item.points}</PointsContainer>
+          <CommentsButton>{item.num_comments}</CommentsButton>
 
           <StoryContainer>
             <TitleLink href={item.url}>{item.title}</TitleLink>
             <FooterLink href={item.url}>{item.url}</FooterLink>
           </StoryContainer>
 
-          <XButton onClick={() => onDismiss(item.id)}>
+          <XButton onClick={() => onDismiss(item.objectID)}>
             &#10006;
           </XButton>
         </Wrapper>
@@ -139,6 +124,7 @@ const Button = ({ onClick, className= '', children }) =>
   >
     {children}
   </button>
+
 
 
 
@@ -171,7 +157,7 @@ const NumberContainerBar = styled.div`
 const RankContainerBar = styled(NumberContainerBar)`
   background-color: #f57c00;
 `;
-const ScoreContainerBar = styled(NumberContainerBar)`
+const PointsContainerBar = styled(NumberContainerBar)`
   background-color: #ff9800;
 `;
 const CommentsButtonBar = styled(NumberContainerBar)`
@@ -179,7 +165,7 @@ const CommentsButtonBar = styled(NumberContainerBar)`
 `;
 
 const StoryContainerBar = styled.div`
-  border: 1px solid blue;  /* For debugging */
+  /* border: 1px solid blue;  /* For debugging */
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -207,9 +193,10 @@ const NumberContainer = styled.div`
   height: 2rem;
   width: 2rem;
   min-width: 2rem;
+  max-width: 2rem;
   line-height: 2rem;
   border-radius: 0.25rem;
-  font-size: 18px;
+  font-size: 13px;
   color: #fff;
   text-align: center;
   vertical-align: middle;
@@ -218,19 +205,20 @@ const NumberContainer = styled.div`
 const RankContainer = styled(NumberContainer)`
   background-color: #f57c00;
 `;
-const ScoreContainer = styled(NumberContainer)`
+const PointsContainer = styled(NumberContainer)`
   background-color: #ff9800;
 `;
 
-const CommentsButton = styled.button`
+const CommentsButton = styled.div`
   background-color: #ffb74d;
   height: 2rem;
-  width: 2rem;
+  width: 2em;
   min-width: 2rem;
+  max-width: 2rem;
   line-height: 2rem;
   border: transparent;
   border-radius: 0.25rem;
-  font-size: 18px;
+  font-size: 13px;
   color: #fff;
   text-align: center;
   vertical-align: middle;
@@ -238,10 +226,13 @@ const CommentsButton = styled.button`
   &:hover{
     background-color: #f57c00;
   }
+
+
+
 `;
 
 const XButton = styled(Button)`
-  background-color: #FFF;
+  background-color: transparent;
   height: 1.6rem;
   width: 1.6rem;
   line-height: 1.6rem;
@@ -276,7 +267,7 @@ const TitleLink = styled.a.attrs({
 })`
   color: #424242;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 1rem;
 `;
 
 const FooterLink = styled.a.attrs({
@@ -288,6 +279,3 @@ const FooterLink = styled.a.attrs({
   text-decoration: none;
   margin: 0px 3px;
 `;
-
-
-export default App;
