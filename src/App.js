@@ -42,6 +42,8 @@ class App extends Component {
     this.setState({ searchTerm: event.target.value });
   }
 
+//fetches results from the HackerNews API when execuiting a search in the Search Component.
+//this method uses the same functionality as the componentDidMount() lifecycle method, but with a modified search term from the local state and not with the initial default search term.
   onSearchSubmit(event) {
     const { searchTerm } = this.state;
     this.fetchSearchTopStories(searchTerm);
