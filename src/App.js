@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
 
-const DEFAULT_QUERY = 'hello';
+const DEFAULT_QUERY = 'react';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
@@ -242,9 +242,6 @@ const CommentsButton = styled.div`
   &:hover{
     background-color: #f57c00;
   }
-
-
-
 `;
 
 const XButton = styled(Button)`
@@ -255,10 +252,8 @@ const XButton = styled(Button)`
   border: transparent;
   border-radius: 1rem;
   align-items: center;
-
   color: #424242;
   font-size: .8rem;
-
   &:hover{
     background-color: #f57c00;
     color: #FFF;
