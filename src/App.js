@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const DEFAULT_QUERY = 'react';
 const DEFAULT_HPP = '50';
 
-const PATH_BASE = 'https://hn.algolia.com/api/v1';
+const PATH_BASE = 'https://hn.algolia.foo.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
@@ -17,6 +17,7 @@ class App extends Component {
     this.state = {
       result: null,
       searchTerm: DEFAULT_QUERY,
+      error: null,
     };
 
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
@@ -50,12 +51,13 @@ class App extends Component {
   }
 
   //Every additional fetch should fetch the next page by providing the second argument. The page argument uses the JavaScript ES6 default parameter to introduce the fallback to page 0 in case no defined page argument is provided for the function.
+  //using catch block in the native fetch to store the error object in the local state by using setState(). everytime the API request is not sucessful, the catch block would be execuited.
   fetchSearchTopStories(searchTerm, page=0) {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}\
 ${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(error => error);
+      .catch(error => this.setState({ error }));
   }
 
   componentDidMount() {
@@ -83,9 +85,17 @@ ${page}&${PARAM_HPP}${DEFAULT_HPP}`)
   }
 
   render() {
-    const { searchTerm, result } = this.state;
+    const { searchTerm, result, error } = this.state;
     //defauly page to 0 since render() method is called before the data is fetched asynchronously in the componentDidMount() lifecycle method.
     const page = (result && result.page) || 0;
+
+    if (error) {
+      return (
+        <BodyStyle>
+          <Wrapper><p>SORRY! Something went wrong.</p></Wrapper>
+        </BodyStyle>
+      )
+    }
     return (
       <BodyStyle>
         <div>
