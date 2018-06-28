@@ -24,8 +24,27 @@ class App extends Component {
     this.onDismiss = this.onDismiss.bind(this);
   }
 
+
+  // 1. get the hits and page from the result.
+  // 2. check if there are already old hits. True if !==0, show hits.
+    // If page is 0, it is a new swearch request from componentDidMount or onSearchSubmit.
+  // 3. merge old and new hits from the recent API request with spread operator
+  // 4. set the merged hits and page in the local component state.
   setSearchTopStories(result) {
-    this.setState({ result });
+    const { hits, page } = result;
+
+    const oldHits = page !== 0
+    ? this.state.result.hits
+    : [];
+
+    const updatedHits = [
+      ...oldHits,
+      ...hits
+    ];
+
+    this.setState({
+      result: { hits: updatedHits, page}
+    });
   }
 
   //Every additional fetch should fetch the next page by providing the second argument. The page argument uses the JavaScript ES6 default parameter to introduce the fallback to page 0 in case no defined page argument is provided for the function.
