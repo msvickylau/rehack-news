@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const DEFAULT_QUERY = 'react';
 const DEFAULT_HPP = '50';
 
-const PATH_BASE = 'https://hn.algolia.foo.com/api/v1';
+const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
