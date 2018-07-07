@@ -13,6 +13,8 @@ const PARAM_HPP = 'hitsPerPage=';
 
 //the searchKey is set before each request is made. It reflects the searchTerm. The searchTerm is a fluctuant variable, because it gets changed everytime you type into the search input field. searchKey isn't fluctuant and is used to determine the recent submitted searh term to the API and used to retrieve the correct reesut from the map of results.
 class App extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -68,14 +70,20 @@ class App extends Component {
   //using catch block in the native fetch to store the error object in the local state by using setState(). everytime the API request is not sucessful, the catch block would be execuited.
   fetchSearchTopStories(searchTerm, page=0) {
     axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-      .then(result => this.setSearchTopStories(result.data))
-      .catch(error => this.setState({ error }));
+      .then(result => this._isMounted && this.setSearchTopStories(result.data))
+      .catch(error => this._isMounted && this.setState({ error }));
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   onSearchChange(event) {
