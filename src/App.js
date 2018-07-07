@@ -12,15 +12,18 @@ const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
+//the searchKey is set before each request is made. It reflects the searchTerm. The searchTerm is a fluctuant variable, because it gets changed everytime you type into the search input field. searchKey isn't fluctuant and is used to determine the recent submitted searh term to the API and used to retrieve the correct reesut from the map of results.
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: null,
+      results: null,
+      searchKey: '',
       searchTerm: DEFAULT_QUERY,
       error: null,
     };
 
+    this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -28,18 +31,25 @@ class App extends Component {
     this.onDismiss = this.onDismiss.bind(this);
   }
 
+  needsToSearchTopStories(searchTerm) {
+    return !this.state.results[searchTerm];
+  }
+
+
 
   // 1. get the hits and page from the result.
-  // 2. check if there are already old hits. True if !==0, show hits.
-    // If page is 0, it is a new swearch request from componentDidMount or onSearchSubmit.
-  // 3. merge old and new hits from the recent API request with spread operator
-  // 4. set the merged hits and page in the local component state.
+  //  -- retrieve searchKey from the component state. (set on componentDidMount and onSearchSubmit)
+  // 2. check if there are already old hits. True if searchKey, show hits.
+    // If false it is a new search request from componentDidMount or onSearchSubmit.
+  // 3. merge old and new hits from the recent API request with spread operator. the old hits get retrieved from the results map with the searchKey as key.
+  // 4. store the updated result by searchKey in the results map.
   setSearchTopStories(result) {
     const { hits, page } = result;
+    const { searchKey, results } = this.state;
 
-    const oldHits = page !== 0
-    ? this.state.result.hits
-    : [];
+    const oldHits = results && results[searchKey]
+      ? results[searchKey].hits
+      : [];
 
     const updatedHits = [
       ...oldHits,
@@ -47,7 +57,10 @@ class App extends Component {
     ];
 
     this.setState({
-      result: { hits: updatedHits, page}
+      results: {
+        ...results,
+        [searchKey]: { hits: updatedHits, page }
+      }
     });
   }
 
@@ -61,7 +74,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { searchTerm } = this.state; this.fetchSearchTopStories(searchTerm);
+    const { searchTerm } = this.state;
+    this.setState({ searchKey: searchTerm });
+    this.fetchSearchTopStories(searchTerm);
   }
 
   onSearchChange(event) {
@@ -72,22 +87,50 @@ class App extends Component {
 //this method uses the same functionality as the componentDidMount() lifecycle method, but with a modified search term from the local state and not with the initial default search term.
   onSearchSubmit(event) {
     const { searchTerm } = this.state;
-    this.fetchSearchTopStories(searchTerm);
+    this.setState({ searchKey: searchTerm });
+
+    if (this.needsToSearchTopStories(searchTerm)) {
+      this.fetchSearchTopStories(searchTerm);
+    }
+
     event.preventDefault();
   }
 
   onDismiss(id) {
+    const { searchKey, results } = this.state;
+    const { hits, page } = results[searchKey];
+
     const isNotId = item => item.objectID !== id;
-    const updatedHits = this.state.result.hits.filter(isNotId);
+    const updatedHits = hits.filter(isNotId);
+
     this.setState({
-      result: { ...this.state.result, hits: updatedHits }
+      results: {
+        ...results,
+        [searchKey]: { hits: updatedHits, page }
+      }
     });
   }
 
   render() {
-    const { searchTerm, result, error } = this.state;
+    const {
+      searchTerm,
+      results,
+      searchKey,
+      error
+    } = this.state;
+
     //defauly page to 0 since render() method is called before the data is fetched asynchronously in the componentDidMount() lifecycle method.
-    const page = (result && result.page) || 0;
+    const page = (
+      results &&
+      results[searchKey] &&
+      results[searchKey].page
+    ) || 0;
+
+    const stories = (
+      results &&
+      results[searchKey] &&
+      results[searchKey].hits
+    ) || [];
 
     if (error) {
       return (
@@ -107,14 +150,14 @@ class App extends Component {
             search
           </Search>
         </div>
-        { result &&
-          <Table
-            stories={result.hits}
-            onDismiss={this.onDismiss}
-          />
-        }
+
+        <Table
+          stories={stories}
+          onDismiss={this.onDismiss}
+        />
+
         <div className="interactions">
-          <Button onClick={() => this.fetchSearchTopStories(searchTerm, page + 1)}>
+          <Button onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
             More Stories
           </Button>
         </div>
