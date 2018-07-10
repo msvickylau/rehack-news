@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App has a valid snapshot 1`] = `
+<div
+  className="sc-bdVaJa cNrCNX"
+>
+  <div>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        onChange={[Function]}
+        type="text"
+        value="react"
+      />
+      <button
+        type="submit"
+      >
+        search
+      </button>
+    </form>
+  </div>
+  <div
+    className="table"
+  >
+    <div
+      className="sc-bwzfXH kLbjmM"
+    >
+      <div
+        className="sc-ifAKCX kymVIW sc-htpNat finPAk"
+      >
+        PTs
+      </div>
+      <div
+        className="sc-EHOje jkfiwZ sc-htpNat finPAk"
+      >
+        CMTs
+      </div>
+      <div
+        className="sc-bZQynM ccsKAm"
+      >
+        STORY
+      </div>
+    </div>
+  </div>
+  <div
+    className="interactions"
+  >
+    <button
+      className=""
+      onClick={[Function]}
+      type="button"
+    >
+      More Stories
+    </button>
+  </div>
+</div>
+`;
