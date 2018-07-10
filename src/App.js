@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const DEFAULT_QUERY = 'react';
@@ -223,7 +224,12 @@ const Table = ({ stories, onDismiss }) =>
     )}
   </div>
 
-const Button = ({ onClick, className= '', children }) =>
+Table.propTypes = {
+  stories: PropTypes.array.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+};
+
+const Button = ({ onClick, className, children }) =>
   <button
     onClick={onClick}
     className={className}
@@ -232,12 +238,20 @@ const Button = ({ onClick, className= '', children }) =>
     {children}
   </button>
 
+Button.defaultProps = {
+  className: '',
+};
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
-  export {
-    Button,
-    Search,
-    Table,
-  };
+export {
+  Button,
+  Search,
+  Table,
+};
 
 
 const BodyStyle = styled.div`
