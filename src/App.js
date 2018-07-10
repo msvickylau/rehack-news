@@ -233,6 +233,11 @@ const Button = ({ onClick, className= '', children }) =>
   </button>
 
 
+  export {
+    Button,
+    Search,
+    Table,
+  };
 
 
 const BodyStyle = styled.div`
