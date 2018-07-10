@@ -18,11 +18,13 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       results: null,
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
       error: null,
+      isLoading: false,
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -62,7 +64,8 @@ class App extends Component {
       results: {
         ...results,
         [searchKey]: { hits: updatedHits, page }
-      }
+      },
+      isLoading: false
     });
   }
 
@@ -70,6 +73,8 @@ class App extends Component {
   //Axios takes the URL as argument and returns a promise. It wraps the result into a data object in JavaScript.
   //using catch block in the native fetch to store the error object in the local state by using setState(). everytime the API request is not sucessful, the catch block would be execuited.
   fetchSearchTopStories(searchTerm, page=0) {
+    this.setState({ isLoading: true });
+
     axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(result => this._isMounted && this.setSearchTopStories(result.data))
       .catch(error => this._isMounted && this.setState({ error }));
@@ -124,7 +129,8 @@ class App extends Component {
       searchTerm,
       results,
       searchKey,
-      error
+      error,
+      isLoading
     } = this.state;
 
     //defauly page to 0 since render() method is called before the data is fetched asynchronously in the componentDidMount() lifecycle method.
@@ -165,9 +171,13 @@ class App extends Component {
         />
 
         <div className="interactions">
-          <Button onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
-            More Stories
-          </Button>
+          { isLoading
+            ? <Loading />
+            : <Button
+              onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
+              More Stories
+            </Button>
+          }
         </div>
       </BodyStyle>
     );
@@ -267,6 +277,9 @@ export {
   Search,
   Table,
 };
+
+const Loading = () =>
+  <div> Loading ... </div>
 
 
 const BodyStyle = styled.div`
