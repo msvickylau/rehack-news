@@ -3,11 +3,12 @@ import axios from 'axios';
 
 import Search from './Search';
 import Table from './Table';
-import Button from './Button';
 
 import {
   BodyStyle,
-  Wrapper
+  Wrapper,
+  MoreButton,
+  Loading
 } from './style';
 
 
@@ -166,13 +167,6 @@ class App extends Component {
       results[searchKey].hits
     ) || [];
 
-    if (error) {
-      return (
-        <BodyStyle>
-          <Wrapper><p>SORRY! Something went wrong.</p></Wrapper>
-        </BodyStyle>
-      )
-    }
     return (
       <BodyStyle>
         <div>
@@ -185,18 +179,23 @@ class App extends Component {
           </Search>
         </div>
 
-        <Table
-          stories={stories}
-          onDismiss={this.onDismiss}
-        />
+        { error
+          ? <Wrapper><p>SORRY! Something went wrong.</p></Wrapper>
+          : <Table
+              stories={stories}
+              onDismiss={this.onDismiss}
+            />
+        }
 
         <div className="interactions">
           { isLoading
-            ? <Loading />
-            : <Button
+            ? <Loading>
+                L O A D I N G
+              </Loading>
+            : <MoreButton
               onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
-              More Stories
-            </Button>
+                M O R E
+              </MoreButton>
           }
         </div>
       </BodyStyle>
@@ -204,6 +203,3 @@ class App extends Component {
   }
 }
 export default App;
-
-const Loading = () =>
-  <div> Loading ... </div>

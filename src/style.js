@@ -3,6 +3,8 @@ import Button from './Button';
 
 export const BodyStyle = styled.div`
   background-color: #f5f5f5;
+  border-radius: 0.25rem;
+  font-size: 13px;
 `
 
 /////////////////// BAR ///////////////////
@@ -137,7 +139,8 @@ export const TitleLink = styled.a.attrs({
 })`
   color: #424242;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 14px;
+  text-decoration: none;
 `;
 
 export const FooterLink = styled.a.attrs({
@@ -145,7 +148,38 @@ export const FooterLink = styled.a.attrs({
   rel: "noopener"
 })`
   color: #828282;
-  font-size: .25rem;
+  font-size: 10px;
   text-decoration: none;
-  margin: 0px 3px;
+`;
+
+/////////////////// FOOTER, ie: loading and more ///////////////////
+
+export const MoreButton = styled.div`
+  background-color: #ffb74d;
+  height: 2rem;
+  line-height: 2rem;
+  border: transparent;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+
+  &:hover{
+    background-color: #f57c00;
+  }
+`;
+
+export const Loading = styled.div`
+  background-color: #ffb74d;
+  height: 2rem;
+  line-height: 2rem;
+  border: transparent;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
 `;
