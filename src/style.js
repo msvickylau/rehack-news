@@ -86,7 +86,7 @@ export const PointsContainer = styled(NumberContainer)`
   background-color: #ff9800;
 `;
 
-export const CommentsButton = styled.div`
+export const CommentsButton = styled.a`
   background-color: #ffb74d;
   height: 2rem;
   width: 2em;
@@ -100,6 +100,7 @@ export const CommentsButton = styled.div`
   text-align: center;
   vertical-align: middle;
   margin-right: 15px;
+  text-decoration: none;
   &:hover{
     background-color: #f57c00;
   }
