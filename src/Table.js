@@ -24,7 +24,7 @@ const Table = ({ stories, onDismiss }) =>
     </WrapperBar>
 
     {stories.map(item =>
-      <Wrapper>
+      <Wrapper key={item.objectID}>
         <PointsContainer>{item.points}</PointsContainer>
 
         {/* <CommentsButton href={'/stories/' + item.objectID + '/comments'}> */}
