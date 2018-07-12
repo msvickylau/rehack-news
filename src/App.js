@@ -15,7 +15,7 @@ import {
 // const TOP_STORIES = 'https://hacker-news.firebaseio.com/v0/topstories.json';
 
 const DEFAULT_QUERY = 'react';
-const DEFAULT_HPP = '50';
+const DEFAULT_HPP = '18';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
