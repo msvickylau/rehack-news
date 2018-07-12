@@ -6,6 +6,69 @@ export const BodyStyle = styled.div`
   border-radius: 0.25rem;
   font-size: 13px;
 `
+export const NavBar = styled.div`
+  background-color: #ff9800;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+`;
+
+export const Logo = styled.div`
+  /* border: 1px solid green;  /* For debugging */
+  height: 1.8rem;
+  line-height: 1.8rem;
+  border-radius: 0.25rem;
+  font-size: 1.8rem;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 15px;
+  font-weight: bold;
+`;
+
+/////////////////// SEARCH ///////////////////
+export const StyledForm = styled.form`
+  /*border: 2px solid pink;  /* For debugging */
+  display: flex;
+  flex-grow: 1;
+`;
+
+export const StyledInput = styled.input`
+  /* border: 1px solid blue;  /* For debugging */
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 1;
+  align-items: flex-start;
+  outline: none;
+  border: none;
+  padding-left: .5rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  font-size: 13px;
+`;
+
+export const SearchButton = styled.button`
+  background-color: #ffb74d;
+  line-height: 1.6rem;
+  width: 3rem;
+  align-items: center;
+  color: #424242;
+  font-size: .8rem;
+  outline: none;
+  border: none;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  &:hover{
+    background-color: #f57c00;
+    color: #FFF;
+  }
+`
+
 
 /////////////////// BAR ///////////////////
 export const WrapperBar = styled.div`
@@ -14,7 +77,9 @@ export const WrapperBar = styled.div`
   justify-content: space-between;
   padding: 10px;
   align-items: center;
+  background-color: transparent;
 `;
+
 export const NumberContainerBar = styled.div`
   background-color: #000000;
   height: 1.3rem;
@@ -29,10 +94,7 @@ export const NumberContainerBar = styled.div`
   margin-right: 15px;
   font-weight: bold;
 `;
-// eslint-disable-next-line
-export const RankContainerBar = styled(NumberContainerBar)`
-  background-color: #f57c00;
-`;
+
 export const PointsContainerBar = styled(NumberContainerBar)`
   background-color: #ff9800;
 `;
@@ -140,7 +202,7 @@ export const TitleLink = styled.a.attrs({
 })`
   color: #424242;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 1em;
   text-decoration: none;
 `;
 
@@ -149,7 +211,7 @@ export const FooterLink = styled.a.attrs({
   rel: "noopener"
 })`
   color: #828282;
-  font-size: 10px;
+  font-size: .75em;
   text-decoration: none;
 `;
 
