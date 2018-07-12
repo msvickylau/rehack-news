@@ -31,7 +31,7 @@ class Search extends Component {
           />
 
           <SearchButton type="submit">
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
           </SearchButton>
 
         </StyledForm>
