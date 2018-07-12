@@ -11,6 +11,8 @@ import {
   Loading
 } from './style';
 
+// eslint-disable-next-line
+// const TOP_STORIES = 'https://hacker-news.firebaseio.com/v0/topstories.json';
 
 const DEFAULT_QUERY = 'react';
 const DEFAULT_HPP = '50';
@@ -44,6 +46,7 @@ class App extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   needsToSearchTopStories(searchTerm) {
@@ -145,6 +148,11 @@ class App extends Component {
     });
   }
 
+  onSave(id) {
+    console.log("objectID=" + id)
+    alert("put this on save page")
+  }
+
   render() {
     const {
       searchTerm,
@@ -184,6 +192,7 @@ class App extends Component {
           : <Table
               stories={stories}
               onDismiss={this.onDismiss}
+              onSave={this.onSave}
             />
         }
 

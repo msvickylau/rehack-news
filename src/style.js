@@ -81,7 +81,6 @@ export const WrapperBar = styled.div`
 `;
 
 export const NumberContainerBar = styled.div`
-  background-color: #000000;
   height: 1.3rem;
   width: 2rem;
   min-width: 2rem;
@@ -102,6 +101,11 @@ export const CommentsButtonBar = styled(NumberContainerBar)`
   background-color: #ffb74d;
 `;
 
+export const SaveContainerBar = styled(NumberContainerBar)`
+  background-color: none;
+  color: #ffb74d;
+`;
+
 export const StoryContainerBar = styled.div`
   /* border: 1px solid blue;  /* For debugging */
   display: flex;
@@ -113,6 +117,7 @@ export const StoryContainerBar = styled.div`
   align-items: flex-start;
   font-size: 10px;
   font-weight: bold;
+  text-align: left;
 `;
 
 
@@ -140,10 +145,7 @@ export const NumberContainer = styled.div`
   vertical-align: middle;
   margin-right: 15px;
 `;
-// eslint-disable-next-line
-export const RankContainer = styled(NumberContainer)`
-  background-color: #f57c00;
-`;
+
 export const PointsContainer = styled(NumberContainer)`
   background-color: #ff9800;
 `;
@@ -168,11 +170,34 @@ export const CommentsButton = styled.a`
   }
 `;
 
+export const HeartButton = styled(Button)`
+  background-color: transparent;
+  height: 2rem;
+  width: 2rem;
+  min-width: 2rem;
+  max-width: 2rem;
+  line-height: 2rem;
+  border: transparent;
+  border-radius: 1rem;
+  align-items: center;
+  outline: none;
+  border: none;
+  color: #ffb74d;
+  font-size: .8rem;
+  margin-right: 15px;
+  &:hover{
+    background-color: #f57c00;
+    color: #FFF;
+  }
+`
+
 export const XButton = styled(Button)`
   background-color: transparent;
-  height: 1.6rem;
-  width: 1.6rem;
-  line-height: 1.6rem;
+  height: 2rem;
+  width: 2rem;
+  min-width: 2rem;
+  max-width: 2rem;
+  line-height: 2rem;
   border: transparent;
   border-radius: 1rem;
   align-items: center;
@@ -204,6 +229,9 @@ export const TitleLink = styled.a.attrs({
   font-weight: bold;
   font-size: 1em;
   text-decoration: none;
+  &:hover{
+    color: #f57c00;
+  }
 `;
 
 export const FooterLink = styled.a.attrs({
@@ -216,7 +244,6 @@ export const FooterLink = styled.a.attrs({
 `;
 
 /////////////////// FOOTER, ie: loading and more ///////////////////
-
 export const MoreButton = styled.div`
   background-color: #ffb74d;
   height: 2rem;

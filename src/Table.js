@@ -5,6 +5,7 @@ import {
   WrapperBar,
   PointsContainerBar,
   CommentsButtonBar,
+  SaveContainerBar,
   StoryContainerBar,
   Wrapper,
   PointsContainer,
@@ -13,13 +14,15 @@ import {
   TitleLink,
   FooterLink,
   XButton,
+  HeartButton
 } from './style';
 
-const Table = ({ stories, onDismiss }) =>
+const Table = ({ stories, onDismiss, onSave }) =>
   <div className="table">
     <WrapperBar>
       <PointsContainerBar>PTs</PointsContainerBar>
       <CommentsButtonBar>CMTs</CommentsButtonBar>
+      <SaveContainerBar>SAVE</SaveContainerBar>
       <StoryContainerBar>STORY</StoryContainerBar>
     </WrapperBar>
 
@@ -34,14 +37,20 @@ const Table = ({ stories, onDismiss }) =>
             {item.num_comments}
         </CommentsButton>
 
+        <HeartButton onClick={() => onSave(item.objectID)}>
+          <i className="fas fa-heart"></i>
+        </HeartButton>
+
         <StoryContainer>
           <TitleLink href={item.url}>{item.title}</TitleLink>
           <FooterLink href={item.url}>{item.url}</FooterLink>
         </StoryContainer>
 
+
         <XButton onClick={() => onDismiss(item.objectID)}>
           &#10006;
         </XButton>
+
       </Wrapper>
     )}
 
