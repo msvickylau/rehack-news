@@ -1,21 +1,45 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+.DS_Store
 
+###### API
+# Ignore bundler config.
+rehack-news-api/r/.bundle
+
+# Ignore the default SQLite database.
+rehack-news-api/db/*.sqlite3
+rehack-news-api/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+rehack-news-api/log/*
+rehack-news-api/tmp/*
+rehack-news-api/!/log/.keep
+rehack-news-api/!/tmp/.keep
+
+# Ignore uploaded files in development
+rehack-news-api/storage/*
+
+rehack-news-api/.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+rehack-news-api/config/master.key
+
+
+###### CLIENT
 # dependencies
-/node_modules
+rehack-news-client/node_modules
 
 # testing
-/coverage
+rehack-news-client/coverage
 
 # production
-/build
+rehack-news-client/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+rehack-news-client/.DS_Store
+rehack-news-client/.env.local
+.rehack-news-client/env.development.local
+rehack-news-client/.env.test.local
+rehack-news-client/.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+rehack-news-client/npm-debug.log*
+rehack-news-client/yarn-debug.log*
+rehack-news-client/yarn-error.log*
