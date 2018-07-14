@@ -36,7 +36,7 @@ rehack-news-client/build
 # misc
 rehack-news-client/.DS_Store
 rehack-news-client/.env.local
-.rehack-news-client/env.development.local
+rehack-news-client/.env.development.local
 rehack-news-client/.env.test.local
 rehack-news-client/.env.production.local
 
