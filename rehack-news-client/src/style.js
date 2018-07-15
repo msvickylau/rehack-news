@@ -1,30 +1,50 @@
 import styled from 'styled-components';
 import Button from './Button';
+import {  Link  } from 'react-router-dom';
 
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: white;
+    float: right;
+    margin-left: 15px;
+
+    &:hover{
+      color: #eee;
+    }
+`;
+
+export const LogoStyledLink = styled(StyledLink)`
+  margin-left: 0px;
+`
 export const BodyStyle = styled.div`
   background-color: #f5f5f5;
-  border-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
   font-size: 13px;
 `
-export const NavBar = styled.div`
+export const StyledNavBar = styled.div`
   background-color: #ff9800;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   padding: 10px;
   align-items: center;
+  /* border: 1px solid green;  /* For debugging */
 `;
 
 export const Logo = styled.div`
-  /* border: 1px solid green;  /* For debugging */
   height: 1.8rem;
   line-height: 1.8rem;
-  border-radius: 0.25rem;
   font-size: 1.8rem;
-  color: #fff;
   text-align: center;
   vertical-align: middle;
   margin-right: 15px;
   font-weight: bold;
+  display: flex;
+  flex-grow: 1;
+
+  /* border: 2px solid pink;  /* For debugging */
 `;
 
 /////////////////// SEARCH ///////////////////
@@ -35,7 +55,6 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledInput = styled.input`
-  /* border: 1px solid blue;  /* For debugging */
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -50,6 +69,8 @@ export const StyledInput = styled.input`
   border-top-left-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
   font-size: 13px;
+
+  /* border: 1px solid blue;  /* For debugging */
 `;
 
 export const SearchButton = styled.button`
@@ -75,7 +96,7 @@ export const WrapperBar = styled.div`
   /* border: 1px solid red;  /* For debugging */
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 15px 10px 10px;
   align-items: center;
   background-color: transparent;
 `;
