@@ -6,6 +6,9 @@ import {
 } from 'react-router-dom';
 
 import App from './App';
+import Login from './Login'
+import Saves from './Saves'
+
 import registerServiceWorker from './registerServiceWorker';
 import {
   StyledNavBar,
@@ -15,18 +18,6 @@ import {
 } from './style';
 import './index.css';
 
-
-const Saves = () => (
-  <div>
-    <h2>Saves</h2>
-  </div>
-)
-
-const Login = () => (
-  <div>
-    <h2>Login</h2>
-  </div>
-)
 
 const NavBar = () =>
   <StyledNavBar>
