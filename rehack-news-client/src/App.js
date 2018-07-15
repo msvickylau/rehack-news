@@ -8,7 +8,8 @@ import {
   BodyStyle,
   Wrapper,
   MoreButton,
-  Loading
+  Loading,
+  WrapperBar
 } from './style';
 
 // eslint-disable-next-line
@@ -177,15 +178,15 @@ class App extends Component {
 
     return (
       <BodyStyle>
-        <div>
+        <WrapperBar>
           <Search
             value={searchTerm}
             onChange={this.onSearchChange}
             onSubmit={this.onSearchSubmit}
           >
-            search
+            <i className="fas fa-search"></i>
           </Search>
-        </div>
+        </WrapperBar>
 
         { error
           ? <Wrapper><p>SORRY! Something went wrong.</p></Wrapper>
