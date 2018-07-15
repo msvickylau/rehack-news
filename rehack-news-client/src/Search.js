@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyledInput, NavBar, Logo, StyledForm, SearchButton } from './style';
+import { StyledInput, StyledForm, SearchButton } from './style';
 
 // the 'this' object references the DOM node with the ref attribute.
 // focuses on the input feild when the component mounted.
@@ -14,29 +14,25 @@ class Search extends Component {
     const {
       value,
       onChange,
+      children,
       onSubmit,
     } = this.props;
 
     return (
-      <NavBar>
-        <Logo>HN</Logo>
+      <StyledForm onSubmit={onSubmit}>
 
-        <StyledForm onSubmit={onSubmit}>
+        <StyledInput
+          type="text"
+          value={value}
+          onChange={onChange}
+          innerRef={(node) => { this.input = node; }}
+        />
 
-          <StyledInput
-            type="text"
-            value={value}
-            onChange={onChange}
-            innerRef={(node) => { this.input = node; }}
-          />
+        <SearchButton type="submit">
+          {children}
+        </SearchButton>
 
-          <SearchButton type="submit">
-            <i className="fas fa-search"></i>
-          </SearchButton>
-
-        </StyledForm>
-
-      </NavBar>
+      </StyledForm>
     );
   }
 }
