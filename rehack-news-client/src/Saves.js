@@ -1,13 +1,53 @@
 import React, { Component } from 'react';
-import { Wrapper, BodyStyle } from './style';
+import {
+  BodyStyle,
+  WrapperBar,
+  StoryContainerBar,
+  Wrapper,
+  StoryContainer,
+  TitleLink,
+  FooterLink,
+  XButton
+} from './style';
 
 class Saves extends Component {
-  render () {
+  constructor(props) {
+    super(props);
+    this.state = {
+      saves: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch('/api/users/2')
+    .then(response => response.json())
+    .then(saves => this.setState({saves: saves})
+    )
+  }
+
+  render() {
     return (
       <BodyStyle>
-        <Wrapper>
-          <h4>SHOW SAVES HERE</h4>
-        </Wrapper>
+        <div className="saves">
+          <WrapperBar>
+            <StoryContainerBar>SAVED STORIES</StoryContainerBar>
+          </WrapperBar>
+
+          {this.state.saves.map(save =>
+            <Wrapper key={save.objectID}>
+
+              <StoryContainer>
+                <TitleLink href={save.url}>{save.title}</TitleLink>
+                <FooterLink href={save.url}>{save.url}</FooterLink>
+              </StoryContainer>
+
+              <XButton onClick={() => alert('delete this object')}>
+                &#10006;
+              </XButton>
+
+            </Wrapper>
+          )}
+        </div>
       </BodyStyle>
     )
   }
