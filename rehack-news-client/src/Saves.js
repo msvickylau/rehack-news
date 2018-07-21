@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   BodyStyle,
   WrapperBar,
+  CommentsButtonBar,
   StoryContainerBar,
   Wrapper,
   CommentsButtonImg,
@@ -31,6 +32,7 @@ class Saves extends Component {
       <BodyStyle>
         <div className="saves">
           <WrapperBar>
+            <CommentsButtonBar>CMTs</CommentsButtonBar>
             <StoryContainerBar>SAVED STORIES</StoryContainerBar>
           </WrapperBar>
 
