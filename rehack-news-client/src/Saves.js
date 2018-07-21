@@ -4,6 +4,7 @@ import {
   WrapperBar,
   StoryContainerBar,
   Wrapper,
+  CommentsButtonImg,
   StoryContainer,
   TitleLink,
   FooterLink,
@@ -35,6 +36,12 @@ class Saves extends Component {
 
           {this.state.saves.map(save =>
             <Wrapper key={save.objectID}>
+
+              <CommentsButtonImg
+                target="_blank"
+                href={'https://news.ycombinator.com/item?id=' + save.objectID }>
+                  <i className="fas fa-comment-dots"></i>
+              </CommentsButtonImg>
 
               <StoryContainer>
                 <TitleLink href={save.url}>{save.title}</TitleLink>

@@ -191,6 +191,10 @@ export const CommentsButton = styled.a`
   }
 `;
 
+export const CommentsButtonImg = styled(CommentsButton)`
+  font-size: 18px;
+`
+
 export const HeartButton = styled(Button)`
   background-color: transparent;
   height: 2rem;
