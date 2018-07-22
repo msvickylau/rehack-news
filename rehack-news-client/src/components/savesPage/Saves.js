@@ -21,7 +21,7 @@ class Saves extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/users/2')
+    fetch('/api/v1/users/2')
     .then(response => response.json())
     .then(saves => this.setState({saves: saves})
     )
