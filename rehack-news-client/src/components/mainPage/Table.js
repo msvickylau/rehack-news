@@ -15,7 +15,7 @@ import {
   FooterLink,
   XButton,
   HeartButton
-} from './style';
+} from '../style';
 
 const Table = ({ stories, onDismiss, onSave }) =>
   <div className="table">

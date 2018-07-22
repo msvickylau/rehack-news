@@ -10,7 +10,7 @@ import {
   TitleLink,
   FooterLink,
   XButton
-} from './style';
+} from '../style';
 
 class Saves extends Component {
   constructor(props) {

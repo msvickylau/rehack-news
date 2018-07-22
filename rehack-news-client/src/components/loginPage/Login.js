@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Wrapper, BodyStyle } from './style';
+import { Wrapper, BodyStyle } from '../style';
 
 class Login extends Component {
 

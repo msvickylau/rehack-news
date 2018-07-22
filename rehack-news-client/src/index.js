@@ -1,43 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
-
-import App from './App';
-import Login from './Login'
-import Saves from './Saves'
-
 import registerServiceWorker from './registerServiceWorker';
-import {
-  StyledNavBar,
-  Logo,
-  StyledLink,
-  LogoStyledLink
-} from './style';
 import './index.css';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
+import App from './components/App';
+import Saves from './components/savesPage/Saves'
+import Login from './components/loginPage/Login'
+import NavBar from './components/common/NavBar'
 
-const NavBar = () =>
-  <StyledNavBar>
-    <Logo>
-      <LogoStyledLink to="/">
-        HN
-      </LogoStyledLink>
-    </Logo>
-
-    <StyledLink to="/saves">
-      <i className="fas fa-heart"></i>
-    </StyledLink>
-
-    <StyledLink to="/login">
-      LogIn
-    </StyledLink>
-  </StyledNavBar>
-;
-
-ReactDOM.render((
+ReactDOM.render(
   <Router>
     <div>
       <NavBar />
@@ -45,11 +17,9 @@ ReactDOM.render((
       <Route path="/saves" component={Saves}/>
       <Route path="/login" component={Login}/>
     </div>
-  </Router>),
+  </Router>,
   document.getElementById('root')
 );
-
-
 
 registerServiceWorker();
 

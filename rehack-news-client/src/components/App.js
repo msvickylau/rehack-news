@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Search from './Search';
-import Table from './Table';
+import Search from './mainPage/Search';
+import Table from './mainPage/Table';
 
 import {
   BodyStyle,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyledInput, StyledForm, SearchButton } from './style';
+import { StyledInput, StyledForm, SearchButton } from '../style';
 
 // the 'this' object references the DOM node with the ref attribute.
 // focuses on the input feild when the component mounted.
