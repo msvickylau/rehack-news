@@ -1,65 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import {connect} from 'react-redux';
+import * as saveActions from '../../actions/saveActions';
+
+import SavesList from './SavesList'
+
 import {
   BodyStyle,
   WrapperBar,
   CommentsButtonBar,
   StoryContainerBar,
-  Wrapper,
-  CommentsButtonImg,
-  StoryContainer,
-  TitleLink,
-  FooterLink,
-  XButton
 } from '../style';
 
 class Saves extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      saves: [],
-    };
-  }
-
-  componentDidMount() {
-    fetch('/api/v1/users/2')
-    .then(response => response.json())
-    .then(saves => this.setState({saves: saves})
-    )
-  }
-
   render() {
     return (
       <BodyStyle>
-        <div className="saves">
-          <WrapperBar>
-            <CommentsButtonBar>CMTs</CommentsButtonBar>
-            <StoryContainerBar>SAVED STORIES</StoryContainerBar>
-          </WrapperBar>
+        <WrapperBar>
+          <CommentsButtonBar>CMTs</CommentsButtonBar>
+          <StoryContainerBar>SAVED STORIES</StoryContainerBar>
+        </WrapperBar>
 
-          {this.state.saves.map(save =>
-            <Wrapper key={save.objectID}>
-
-              <CommentsButtonImg
-                target="_blank"
-                href={'https://news.ycombinator.com/item?id=' + save.objectID }>
-                  <i className="fas fa-comment-dots"></i>
-              </CommentsButtonImg>
-
-              <StoryContainer>
-                <TitleLink href={save.url}>{save.title}</TitleLink>
-                <FooterLink href={save.url}>{save.url}</FooterLink>
-              </StoryContainer>
-
-              <XButton onClick={() => alert('delete this object')}>
-                &#10006;
-              </XButton>
-
-            </Wrapper>
-          )}
-        </div>
+        <SavesList saves={this.props.saves} />
       </BodyStyle>
     )
   }
 }
 
-export default Saves;
+//The mapStateToProps function recieves state from the store whenever state has changed and make data from that data available to the component as props.
+function mapStateToProps(state, ownProps) {
+  return {
+    saves: state.saves
+  };
+}
+
+// The connect function is provided by Redux. It subscribes our container component to the store, so that it will be alerted when state changes.
+export default connect(mapStateToProps)(Saves);
