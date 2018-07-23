@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  def index
-    @user = User.find_by_id(params[:id])
-    @saves = Save.where("user_id = #{@user.id}")
+  def show
+    @user = User.find(params[:id])
 
-    render(
-      json: @saves.all
+    render (
+      { :json => @user, :except=> [:password_digest, :email] }
     )
   end
 end
