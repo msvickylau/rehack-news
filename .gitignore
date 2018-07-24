@@ -19,8 +19,6 @@ rehack-news-api/storage/*
 
 rehack-news-api/.byebug_history
 
-rehack-news-api/config/application.yml
-
 # Ignore master key for decrypting credentials and more.
 rehack-news-api/config/master.key
 
