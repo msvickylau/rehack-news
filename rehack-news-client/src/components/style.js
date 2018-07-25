@@ -2,6 +2,41 @@ import styled from 'styled-components';
 import Button from './common/Button';
 import {  Link  } from 'react-router-dom';
 
+export const LoginButton = styled.a`
+  background-color: #ffb74d;
+  line-height: 3rem;
+  border: transparent;
+  border-radius: 0.25rem;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  padding: 15px;
+  &:hover{
+    background-color: #f57c00;
+  }
+`;
+
+export const LoginWrapper = styled.div`
+/* border: 1px solid blue;  /* For debugging */
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+`;
+export const LoginBkrd = styled.div`
+/* border: 1px solid red;  /* For debugging */
+  background-color: white;
+  height: 230px;
+  min-width: 300px;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+`;
 
 export const StyledLink = styled(Link)`
     text-decoration: none;
@@ -43,6 +78,7 @@ export const Logo = styled.div`
   font-weight: bold;
   display: flex;
   flex-grow: 1;
+  color: #fff;
 
   /* border: 2px solid pink;  /* For debugging */
 `;
