@@ -7,7 +7,7 @@ import Saves from './savesPage/Saves'
 import Login from './loginPage/Login'
 
 import NavBar from './common/NavBar'
-import LogInNavBar from './common/LogInNavBar'
+
 
 
 
@@ -34,7 +34,6 @@ class App extends Component {
               <Route path="/saves" component={Saves}/>
             </div>
           : <div className='Login'>
-              <LogInNavBar />
               <Login/>
               <Route path="/login" component={Login}/>
             </div>
