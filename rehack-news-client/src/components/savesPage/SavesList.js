@@ -1,4 +1,4 @@
-import React, { Component, PropTypes} from 'react';
+import React from 'react';
 
 import {
   Wrapper,
@@ -37,4 +37,4 @@ const SavesList = ({saves}) => {
   )
 }
 
-export default SavesList;  
+export default SavesList;

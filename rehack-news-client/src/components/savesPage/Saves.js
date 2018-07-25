@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as saveActions from '../../actions/saveActions';
+// import * as saveActions from '../../actions/saveActions';
 
 import SavesList from './SavesList'
 
@@ -21,6 +21,7 @@ class Saves extends Component {
         </WrapperBar>
 
         <SavesList saves={this.props.saves} />
+    
       </BodyStyle>
     )
   }
