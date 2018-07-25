@@ -19,8 +19,8 @@ const NavBar = () =>
       <i className="fas fa-heart"></i>
     </StyledLink>
 
-    <StyledLink to="/login">
-      LogIn
+    <StyledLink to="/signOut">
+      Signout
     </StyledLink>
   </StyledNavBar>
 ;
