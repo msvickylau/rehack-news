@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2018_07_13_173724) do
   create_table "saves", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "objectID"
+    t.string "objectID"
     t.string "title"
     t.string "url"
   end
