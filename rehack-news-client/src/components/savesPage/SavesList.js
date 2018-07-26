@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Wrapper,
@@ -14,7 +15,7 @@ const SavesList = ({saves}) => {
   return (
     <div className="saves">
       {saves.map(save =>
-        <Wrapper key={save.objectID}>
+        <Wrapper key={save.id}>
 
           <CommentsButtonImg
             target="_blank"
@@ -36,5 +37,10 @@ const SavesList = ({saves}) => {
     </div>
   )
 }
+
+SavesList.propTypes = {
+  saves: PropTypes.array.isRequired
+};
+
 
 export default SavesList;

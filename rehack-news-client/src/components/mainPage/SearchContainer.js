@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 import Search from './Search';
 import Table from './Table';
 
@@ -39,6 +40,7 @@ class SearchContainer extends Component {
       searchTerm: DEFAULT_QUERY,
       error: null,
       isLoading: false,
+      saves: {}
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -47,7 +49,7 @@ class SearchContainer extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
-    this.onSave = this.onSave.bind(this);
+    this.saveStory = this.saveStory.bind(this);
   }
 
   needsToSearchTopStories(searchTerm) {
@@ -149,9 +151,38 @@ class SearchContainer extends Component {
     });
   }
 
-  onSave(id) {
-    console.log("objectID=" + id)
-    alert("put this on save page")
+  saveStory = (story) => {
+    const { searchKey, results } = this.state;
+    const { hits, page } = results[searchKey];
+
+    const isNotId = item => item.objectID !== story.objectID;
+    const updatedHits = hits.filter(isNotId);
+
+    this.setState({
+      results: {
+        ...results,
+        [searchKey]: { hits: updatedHits, page }
+      }
+    });
+
+    let data = {
+        objectID: story.objectID,
+        title: story.title,
+        url: story.url
+      }
+    console.log(JSON.stringify(data))
+
+    const url = 'http://localhost:3001/api/v1/saves';
+
+    fetch(url, {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
   }
 
   render() {
@@ -193,7 +224,7 @@ class SearchContainer extends Component {
           : <Table
               stories={stories}
               onDismiss={this.onDismiss}
-              onSave={this.onSave}
+              onSave={this.saveStory}
             />
         }
 

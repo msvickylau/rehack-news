@@ -37,7 +37,7 @@ const Table = ({ stories, onDismiss, onSave }) =>
             {item.num_comments}
         </CommentsButton>
 
-        <HeartButton onClick={() => onSave(item.objectID)}>
+        <HeartButton onClick={() => onSave(item)}>
           <i className="fas fa-heart"></i>
         </HeartButton>
 
