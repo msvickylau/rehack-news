@@ -13,18 +13,11 @@
 ActiveRecord::Schema.define(version: 2018_07_13_173724) do
 
   create_table "saves", force: :cascade do |t|
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "objectID"
     t.string "title"
     t.string "url"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
   end
 
 end

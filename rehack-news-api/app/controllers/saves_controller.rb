@@ -1,7 +1,6 @@
 class SavesController < ApplicationController
   def index
-    @user = User.find_by_id(params[:id])
-    @saves = Save.where("user_id = #{@user.id}")
+    @saves = Save.all
 
     render(
       json: @saves.all
