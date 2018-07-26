@@ -18,10 +18,7 @@ const NavBar = () =>
     <StyledLink to="/saves">
       <i className="fas fa-heart"></i>
     </StyledLink>
-
-    <StyledLink to="/signOut">
-      Signout
-    </StyledLink>
+    
   </StyledNavBar>
 ;
 export default NavBar;

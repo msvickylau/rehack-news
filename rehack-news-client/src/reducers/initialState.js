@@ -1,4 +1,3 @@
 export default {
-  saves: [],
-  users: []
+  saves: []
 }

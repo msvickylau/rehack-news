@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 // import * as saveActions from '../../actions/saveActions';
-
 import SavesList from './SavesList'
 
 import {
@@ -21,7 +20,7 @@ class Saves extends Component {
         </WrapperBar>
 
         <SavesList saves={this.props.saves} />
-    
+
       </BodyStyle>
     )
   }
