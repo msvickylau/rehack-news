@@ -10,7 +10,7 @@ import {
 const NavBar = () =>
   <StyledNavBar>
     <Logo>
-      <LogoStyledLink to="/">
+      <LogoStyledLink to="/topStories">
         HN
       </LogoStyledLink>
     </Logo>
@@ -18,7 +18,11 @@ const NavBar = () =>
     <StyledLink to="/saves">
       <i className="fas fa-heart"></i>
     </StyledLink>
-    
+
+    <StyledLink to="/">
+      <i className="fas fa-search"></i>
+    </StyledLink>
+
   </StyledNavBar>
 ;
 export default NavBar;

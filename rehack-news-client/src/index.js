@@ -5,12 +5,15 @@ import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-import { loadSaves } from './actions/saveActions'
+import { loadSaves } from './actions/saveActions';
+import { loadTopStories } from './actions/topStoriesActions';
+
 import App from './components/App';
 
 const store = configureStore();
 
 store.dispatch(loadSaves());
+store.dispatch(loadTopStories());
 
 //Here we wrap <Router> component in a <Provider> component that Redux gives us access to, and pass in an instance of our store.
 ReactDOM.render(
@@ -21,7 +24,3 @@ ReactDOM.render(
 );
 
 registerServiceWorker();
-
-if (module.hot) {
-  module.hot.accept();
-}

@@ -42,7 +42,8 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     color: white;
     float: right;
-    margin-left: 15px;
+    margin-left: 20px;
+    font-size: 1.2rem;
 
     &:hover{
       color: #eee;
@@ -51,6 +52,7 @@ export const StyledLink = styled(Link)`
 
 export const LogoStyledLink = styled(StyledLink)`
   margin-left: 0px;
+  font-size: 1.8rem;
 `
 export const BodyStyle = styled.div`
   background-color: #f5f5f5;
@@ -71,7 +73,6 @@ export const StyledNavBar = styled.div`
 export const Logo = styled.div`
   height: 1.8rem;
   line-height: 1.8rem;
-  font-size: 1.8rem;
   text-align: center;
   vertical-align: middle;
   margin-right: 15px;
