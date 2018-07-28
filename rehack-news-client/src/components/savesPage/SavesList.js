@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
+  WrapperBar,
+  CommentsButtonBar,
+  StoryContainerBar,
   Wrapper,
   CommentsButtonImg,
   StoryContainer,
@@ -14,6 +17,11 @@ import {
 const SavesList = ({saves}) => {
   return (
     <div className="saves">
+      <WrapperBar>
+        <CommentsButtonBar>CMTs</CommentsButtonBar>
+        <StoryContainerBar>SAVED STORIES</StoryContainerBar>
+      </WrapperBar>
+
       {saves.map(save =>
         <Wrapper key={save.id}>
 

@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as saveActions from '../../actions/saveActions';
+// import { bindActionCreators } from 'redux';
+// import * as saveActions from '../../actions/saveActions';
 import SavesList from './SavesList'
 
 import {
-  BodyStyle,
-  WrapperBar,
-  CommentsButtonBar,
-  StoryContainerBar,
+  BodyStyle
 } from '../style';
 
-class Saves extends Component {
+class SavesContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -23,19 +20,14 @@ class Saves extends Component {
   render() {
     return (
       <BodyStyle>
-        <WrapperBar>
-          <CommentsButtonBar>CMTs</CommentsButtonBar>
-          <StoryContainerBar>SAVED STORIES</StoryContainerBar>
-        </WrapperBar>
-
         <SavesList saves={this.props.saves} />
-
+        {/* {console.log(this.props.saves)} */}
       </BodyStyle>
     )
   }
 }
 
-Saves.propTypes = {
+SavesContainer.propTypes = {
   saves: PropTypes.array.isRequired
 };
 
@@ -47,4 +39,4 @@ function mapStateToProps(state, ownProps) {
 }
 
 // The connect function is provided by Redux. It subscribes our container component to the store, so that it will be alerted when state changes.
-export default connect(mapStateToProps)(Saves);
+export default connect(mapStateToProps)(SavesContainer);
