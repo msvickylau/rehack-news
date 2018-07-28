@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 import NavBar from './common/NavBar'
 import SearchContainer from './mainPage/SearchContainer'
-import Saves from './savesPage/Saves'
+import SavesContainer from './savesPage/SavesContainer'
+import TopStories from './TopStories'
 
 class App extends Component {
 
@@ -13,7 +14,8 @@ class App extends Component {
          <div className='App'>
           <NavBar />
           <Route exact path="/" component={SearchContainer}/>
-          <Route path="/saves" component={Saves}/>
+          <Route exact path="/topstories" component={TopStories}/>
+          <Route path="/saves" component={SavesContainer}/>
         </div>
       </Router>
     )
