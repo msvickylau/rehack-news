@@ -170,7 +170,7 @@ class SearchContainer extends Component {
         title: story.title,
         url: story.url
       }
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
 
     const url = 'http://localhost:3001/api/v1/saves';
 
@@ -227,6 +227,7 @@ class SearchContainer extends Component {
               onSave={this.saveStory}
             />
         }
+        {/* {console.log(stories)} */}
 
         <div className="interactions">
           { isLoading
