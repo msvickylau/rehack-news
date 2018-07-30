@@ -20,12 +20,14 @@ import {
 const TopStoriesList = ({topStories, onDismiss, onSave }) =>
   <div className="topStories">
     <WrapperBar>
+      TOP STORIES
+    </WrapperBar>
+    <WrapperBar>
       <PointsContainerBar>PTs</PointsContainerBar>
       <CommentsButtonBar>CMTs</CommentsButtonBar>
       <SaveContainerBar>SAVE</SaveContainerBar>
       <StoryContainerBar>STORY</StoryContainerBar>
     </WrapperBar>
-
 
     {topStories.map(item =>
       <Wrapper key={item.id}>
@@ -33,11 +35,11 @@ const TopStoriesList = ({topStories, onDismiss, onSave }) =>
 
         <CommentsButton
           target="_blank"
-          href={'https://news.ycombinator.com/item?id=' + item.id }> num
-            {/* {item.num_comments} */}
+          href={'https://news.ycombinator.com/item?id=' + item.id }>
+            {item.children.length}
         </CommentsButton>
 
-        <HeartButton onClick={() => onSave(item)}>
+        <HeartButton onClick={() => onSave(item.id)}>
           <i className="fas fa-heart"></i>
         </HeartButton>
 
@@ -46,11 +48,9 @@ const TopStoriesList = ({topStories, onDismiss, onSave }) =>
           <FooterLink href={item.url}>{item.url}</FooterLink>
         </StoryContainer>
 
-
         <XButton onClick={() => onDismiss(item.id)}>
           &#10006;
         </XButton>
-
       </Wrapper>
     )}
 
