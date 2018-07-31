@@ -18,6 +18,7 @@ class SavesController < ApplicationController
 
   def save_params
     params.permit(
+      :id,
       :objectID,
       :title,
       :url

@@ -14,7 +14,7 @@ import {
 } from '../style';
 
 
-const SavesList = ({saves}) => {
+const SavesList = ({saves, onDismiss}) => {
   return (
     <div className="saves">
       <WrapperBar>
@@ -36,7 +36,7 @@ const SavesList = ({saves}) => {
             <FooterLink href={save.url}>{save.url}</FooterLink>
           </StoryContainer>
 
-          <XButton onClick={() => alert('delete this object')}>
+          <XButton onClick={() => onDismiss(save)}>
             &#10006;
           </XButton>
 

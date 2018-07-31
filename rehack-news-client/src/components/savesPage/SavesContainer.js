@@ -13,14 +13,35 @@ class SavesContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      save :this.props.save
+      saves: this.props.saves
     };
-
   }
+
+  onDismiss = (story) => {
+    const url = `http://localhost:3001/api/v1/saves/${story.id}`
+
+    let data = {
+      id: story.id,
+    }
+
+    fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'text'
+      }
+    })
+    .then(response => response.text())
+    .catch(error => console.error(`This is the fetch error message=\n`, error));
+  }
+
   render() {
     return (
       <BodyStyle>
-        <SavesList saves={this.props.saves} />
+        <SavesList
+          saves={this.props.saves}
+          onDismiss={this.onDismiss}
+        />
         {/* {console.log(this.props.saves)} */}
       </BodyStyle>
     )
