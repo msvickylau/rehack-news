@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-
+import { createSave }  from '../../actions/saveActions';
 import Search from './Search';
 import Table from './Table';
 
@@ -151,7 +151,7 @@ class SearchContainer extends Component {
     });
   }
 
-  saveStory = (story) => {
+  saveStory(story) {
     const { searchKey, results } = this.state;
     const { hits, page } = results[searchKey];
 
@@ -170,19 +170,7 @@ class SearchContainer extends Component {
         title: story.title,
         url: story.url
       }
-    // console.log(JSON.stringify(data))
-
-    const url = 'http://localhost:3001/api/v1/saves';
-
-    fetch(url, {
-      method: 'POST', // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+    createSave(data);
   }
 
   render() {

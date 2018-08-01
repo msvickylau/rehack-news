@@ -1,19 +1,45 @@
 import * as types from '../actions/actionTypes';
-import initialState from './initialState';
 
-export default function saveReducer(state = initialState.saves, action) {
+export default function savesReducer(state = {
+    saves: [],
+    fetching: false,
+    fetched: false,
+    error: null,
+  }, action) {
+
   switch(action.type) {
 
-    case types.LOAD_SAVES_SUCCESS:
-      return action.saves //to return a new state.
+    case types.FETCH_SAVES: {
+      return {...state, fetching: true}
+    }
 
-    case types.CREATE_SAVE_SUCCESS:
-      return [
-        ...state.filter(save => save.id !== action.save.id),
-        Object.assign({}, action.save)
-      ]
+    case types.FETCH_SAVES_REJECTED: {
+      return {...state, fetching: false, error: action.error}
+    }
 
-    default:
-      return state;
+    case types.FETCH_SAVES_FULFILLED: {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        saves: action.saves
+      } // action.saves //to return a new state.
+    }
+
+    case types.ADD_SAVE: {
+      return {
+        ...state,
+        saves: [...state.saves, action.responseSave],
+      }
+    }
+
+    case types.DELETE_SAVE: {
+      return {
+        ...state,
+        saves: state.saves.filter(save => save.id !== action.payload),
+      }
+    }
+
+    default: return state;
   }
 }

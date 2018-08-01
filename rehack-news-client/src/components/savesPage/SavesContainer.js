@@ -55,7 +55,7 @@ SavesContainer.propTypes = {
 //The mapStateToProps function recieves state from the store whenever state has changed and make data from that data available to the component as props.
 function mapStateToProps(state, ownProps) {
   return {
-    saves: state.saves
+    saves: state.saves.saves
   };
 }
 
