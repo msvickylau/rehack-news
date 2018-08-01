@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import * as saveActions from '../../actions/topStoriesActions';
 import TopStoriesList from './TopStoriesList'
-
-import {
-  BodyStyle, Wrapper, StoryContainer, TitleLink, FooterLink
-} from '../style';
+import { createSave }  from '../../actions/saveActions';
+import { BodyStyle } from '../style';
 
 class TopStoriesContainer extends Component {
   constructor(props, context) {
@@ -16,17 +14,35 @@ class TopStoriesContainer extends Component {
       topStories: this.props.topStories
     };
 
-    // this.onDismiss = this.onDismiss.bind(this);
-    // this.saveStory = this.saveStory.bind(this);
+    this.onDismiss = this.onDismiss.bind(this);
+    this.saveStory = this.saveStory.bind(this);
   }
 
-  // onDismiss(id) {
-  //   const isNotId = item => item.id !== id;
-  //   const updatedList = this.state.topStories.filter(isNotId);
-  //   this.setState({ topStories: updatedList });
-  //   console.log(id)
-  //   console.log(updatedList)
-  // }
+// componentWillReceiveProps function will be invoked every time a component's props are updated by a re-invocation of the mapStateToProps function.
+// this should update the state whenever props gets updated.
+  componentWillReceiveProps(nextProps) {
+    if (this.props.topStories !== nextProps.topStories) {
+      this.setState({ topStories: nextProps.topStories })
+    }
+  }
+
+  onDismiss(id) {
+    const isNotId = item => item.id !== id;
+    const updatedList = this.state.topStories.filter(isNotId);
+    this.setState({ topStories: updatedList });
+    console.log(id)
+    console.log(updatedList)
+  }
+
+  saveStory(story) {
+    let data = {
+      objectID: story.id,
+      title: story.title,
+      url: story.url
+    }
+
+    createSave(data);
+  }
 
   render() {
     return (
@@ -34,8 +50,8 @@ class TopStoriesContainer extends Component {
 
         <TopStoriesList
           topStories={this.props.topStories}
-          // onDismiss={this.onDismiss}
-          // onSave={this.saveStory}
+          onDismiss={this.onDismiss}
+          onSave={this.saveStory}
         />
 
       </BodyStyle>

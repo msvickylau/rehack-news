@@ -8,7 +8,7 @@ class TopStoriesApi {
     .then(response => {
       return response.json();  // all top stories from API
     }).then(allStoriesJson => {
-      let topTwentyStoriesArray = allStoriesJson.slice(0 ,20);
+      let topTwentyStoriesArray = allStoriesJson.slice(0, 20);
 
       return fetchEachStory(topTwentyStoriesArray);
     }).catch(error => {

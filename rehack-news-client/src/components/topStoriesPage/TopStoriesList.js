@@ -20,13 +20,10 @@ import {
 const TopStoriesList = ({topStories, onDismiss, onSave }) =>
   <div className="topStories">
     <WrapperBar>
-      TOP STORIES
-    </WrapperBar>
-    <WrapperBar>
       <PointsContainerBar>PTs</PointsContainerBar>
       <CommentsButtonBar>CMTs</CommentsButtonBar>
       <SaveContainerBar>SAVE</SaveContainerBar>
-      <StoryContainerBar>STORY</StoryContainerBar>
+      <StoryContainerBar>TOP STORIES</StoryContainerBar>
     </WrapperBar>
 
     {topStories.map(item =>
@@ -39,7 +36,7 @@ const TopStoriesList = ({topStories, onDismiss, onSave }) =>
             {item.children.length}
         </CommentsButton>
 
-        <HeartButton onClick={() => onSave(item.id)}>
+        <HeartButton onClick={() => onSave(item)}>
           <i className="fas fa-heart"></i>
         </HeartButton>
 
