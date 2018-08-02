@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
-import { createSave }  from '../../actions/saveActions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as courseActions from '../../actions/saveActions';
 import Search from './Search';
 import Table from './Table';
-
+import axios from 'axios';
+import {
+  DEFAULT_QUERY,
+  DEFAULT_HPP,
+  PATH_BASE,
+  PATH_SEARCH,
+  PARAM_SEARCH,
+  PARAM_PAGE,
+  PARAM_HPP,
+} from '../constants/index.js';
 import {
   BodyStyle,
   Wrapper,
@@ -12,18 +21,6 @@ import {
   Loading,
   WrapperBar
 } from '../style';
-
-// eslint-disable-next-line
-// const TOP_STORIES = 'https://hacker-news.firebaseio.com/v0/topstories.json';
-
-const DEFAULT_QUERY = 'react';
-const DEFAULT_HPP = '18';
-
-const PATH_BASE = 'https://hn.algolia.com/api/v1';
-const PATH_SEARCH = '/search';
-const PARAM_SEARCH = 'query=';
-const PARAM_PAGE = 'page=';
-const PARAM_HPP = 'hitsPerPage=';
 
 /*
 the searchKey is set before each request is made. It reflects the searchTerm. The searchTerm is a fluctuant variable, because it gets changed everytime you type into the search input field. searchKey isn't fluctuant and is used to determine the recent submitted searh term to the API and used to retrieve the correct reesut from the map of results.
@@ -165,12 +162,12 @@ class SearchContainer extends Component {
       }
     });
 
-    let data = {
-        objectID: story.objectID,
-        title: story.title,
-        url: story.url
-      }
-    createSave(data);
+    const data = {
+      objectID: story.objectID,
+      title: story.title,
+      url: story.url
+    }
+    this.props.actions.createSave(data);
   }
 
   render() {
@@ -232,4 +229,22 @@ class SearchContainer extends Component {
     );
   }
 }
-export default SearchContainer;
+
+function mapStateToProps(state, ownProps) {
+  return {
+    results: null,
+    searchKey: '',
+    searchTerm: DEFAULT_QUERY,
+    error: null,
+    isLoading: false,
+    saves: {}
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(courseActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
