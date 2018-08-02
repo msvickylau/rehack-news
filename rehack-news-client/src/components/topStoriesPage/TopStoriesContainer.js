@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 // import * as saveActions from '../../actions/topStoriesActions';
 import TopStoriesList from './TopStoriesList'
-import { createSave }  from '../../actions/saveActions';
+import * as courseActions from '../../actions/saveActions';
 import { BodyStyle } from '../style';
 
 class TopStoriesContainer extends Component {
@@ -11,7 +12,7 @@ class TopStoriesContainer extends Component {
     super(props, context);
 
     this.state = {
-      topStories: this.props.topStories
+      topStories: this.props.topStories,
     };
 
     this.onDismiss = this.onDismiss.bind(this);
@@ -35,14 +36,14 @@ class TopStoriesContainer extends Component {
   }
 
   saveStory(story) {
-    let data = {
+    const data = {
       objectID: story.id,
       title: story.title,
       url: story.url
     }
-
-    createSave(data);
+    this.props.actions.createSave(data);
   }
+
 
   render() {
     return (
@@ -70,5 +71,11 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(courseActions, dispatch)
+  };
+}
+
 // The connect function is provided by Redux. It subscribes our container component to the store, so that it will be alerted when state changes.
-export default connect(mapStateToProps)(TopStoriesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TopStoriesContainer);

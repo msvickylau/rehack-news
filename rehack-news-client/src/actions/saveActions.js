@@ -14,15 +14,17 @@ export function fetchSaves() {
   }
 }
 
-export function createSave(data) {
-  fetch(`http://localhost:3001/api/v1/saves`, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers:{
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.json())
-  .catch(error => console.error('Error:', error))
-  .then(response => console.log('Success:', response));
+export function addSave(save) {
+  return {type: types.ADD_SAVE, save}
+}
+export function createSave(save) {
+  return function (dispatch) {
+    return SavesApi.createSave(save).then(responseSave => {
+      // console.log("hello there" + responseSave)
+      dispatch(addSave(responseSave));
+      return responseSave;
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }

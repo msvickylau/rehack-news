@@ -26,10 +26,21 @@ export default function savesReducer(state = {
       } // action.saves //to return a new state.
     }
 
+    // case types.ADD_SAVE: {
+      // return {
+        // ...state,
+        // saves: [
+        //   ...state.filter(save => save.id !== action.save.id),
+        //   Object.assign({}, action.save)
+        // ]
+      // }
+    // }
+
     case types.ADD_SAVE: {
+      console.log(action.save)
       return {
         ...state,
-        saves: [...state.saves, action.responseSave],
+        saves: [...state.saves, action.save],
       }
     }
 
