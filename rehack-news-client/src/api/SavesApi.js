@@ -22,5 +22,17 @@ class SavesApi {
     });
   }
 
+  static deleteSave(save) {
+    const request = new  Request(`http://localhost:3001/api/v1/saves/${save.id}`, {
+      method: 'DELETE'
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
 }
 export default SavesApi;

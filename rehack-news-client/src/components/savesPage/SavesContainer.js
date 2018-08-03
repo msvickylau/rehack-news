@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import * as saveActions from '../../actions/saveActions';
+import { bindActionCreators } from 'redux';
+import * as courseActions from '../../actions/saveActions';
 import SavesList from './SavesList'
 
 import {
@@ -15,24 +15,11 @@ class SavesContainer extends Component {
     this.state = {
       saves: this.props.saves
     };
+    this.deleteSave = this.deleteSave.bind(this);
   }
 
-  onDismiss = (story) => {
-    const url = `http://localhost:3001/api/v1/saves/${story.id}`
-
-    let data = {
-      id: story.id,
-    }
-
-    fetch(url, {
-      method: 'DELETE',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'text'
-      }
-    })
-    .then(response => response.text())
-    .catch(error => console.error(`This is the fetch error message=\n`, error));
+  deleteSave(story) {
+    this.props.actions.deleteSave(story);
   }
 
   render() {
@@ -40,9 +27,8 @@ class SavesContainer extends Component {
       <BodyStyle>
         <SavesList
           saves={this.props.saves}
-          onDismiss={this.onDismiss}
+          onDismiss={this.deleteSave}
         />
-        {/* {console.log(this.props.saves)} */}
       </BodyStyle>
     )
   }
@@ -59,5 +45,11 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(courseActions, dispatch)
+  };
+}
+
 // The connect function is provided by Redux. It subscribes our container component to the store, so that it will be alerted when state changes.
-export default connect(mapStateToProps)(SavesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SavesContainer);
