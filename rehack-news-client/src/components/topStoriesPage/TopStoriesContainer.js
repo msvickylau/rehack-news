@@ -1,38 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-// import * as saveActions from '../../actions/topStoriesActions';
+import { bindActionCreators } from 'redux';
+import * as saveActions from '../../actions/saveActions';
+import * as dismissActions from '../../actions/topStoriesActions';
 import TopStoriesList from './TopStoriesList'
-import * as courseActions from '../../actions/saveActions';
 import { BodyStyle } from '../style';
 
 class TopStoriesContainer extends Component {
   constructor(props, context) {
     super(props, context);
-
+    console.log("from the container... WHY IS THIS EMPTY :(  ")
+    console.log(this.props.topStories)
     this.state = {
       topStories: this.props.topStories,
     };
-
     this.onDismiss = this.onDismiss.bind(this);
     this.saveStory = this.saveStory.bind(this);
   }
 
-// componentWillReceiveProps function will be invoked every time a component's props are updated by a re-invocation of the mapStateToProps function.
-// this should update the state whenever props gets updated.
-  componentWillReceiveProps(nextProps) {
-    if (this.props.topStories !== nextProps.topStories) {
-      this.setState({ topStories: nextProps.topStories })
-    }
-  }
-
-  onDismiss(id) {
-    const isNotId = item => item.id !== id;
-    const updatedList = this.state.topStories.filter(isNotId);
-    this.setState({ topStories: updatedList });
-    console.log(id)
-    console.log(updatedList)
+  onDismiss(story) {
+    this.props.dismissActions.dismissStory(story);
   }
 
   saveStory(story) {
@@ -41,7 +29,8 @@ class TopStoriesContainer extends Component {
       title: story.title,
       url: story.url
     }
-    this.props.actions.createSave(data);
+    this.props.saveActions.createSave(data);
+    this.props.dismissActions.dismissStory(story);
   }
 
 
@@ -67,13 +56,14 @@ TopStoriesContainer.propTypes = {
 //The mapStateToProps function recieves state from the store whenever state has changed and make data from that data available to the component as props.
 function mapStateToProps(state, ownProps) {
   return {
-    topStories: state.topStories
+    topStories: state.topStories.topStories
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(courseActions, dispatch)
+    saveActions: bindActionCreators(saveActions, dispatch),
+    dismissActions: bindActionCreators(dismissActions, dispatch)
   };
 }
 

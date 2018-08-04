@@ -45,7 +45,7 @@ const TopStoriesList = ({topStories, onDismiss, onSave }) =>
           <FooterLink href={item.url}>{item.url}</FooterLink>
         </StoryContainer>
 
-        <XButton onClick={() => onDismiss(item.id)}>
+        <XButton onClick={() => onDismiss(item)}>
           &#10006;
         </XButton>
       </Wrapper>

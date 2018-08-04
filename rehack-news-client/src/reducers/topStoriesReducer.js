@@ -1,11 +1,39 @@
 import * as types from '../actions/actionTypes';
-import initialState from './initialState';
 
-export default function topStoriesReducer(state = initialState.topStories, action) {
+export default function topStoriesReducer(state = {
+  topStories: [],
+  fetching: false,
+  fetched:false,
+  error: null,
+}, action) {
+
   switch(action.type) {
 
-    case types.LOAD_TOP_STORIES_SUCCESS:
-      return action.topStories
+    case types.FETCH_TOPSTORIES: {
+      return {...state, fetching: true}
+    }
+
+    case types.FETCH_TOPSTORIES_REJECTED: {
+      return {...state, fetching: false, error: action.error}
+    }
+
+    case types.FETCH_TOPSTORIES_FULFILLED: {
+    console.log("this is action.topStories from reducer:")
+    console.log(action.topStories)
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        topStories: action.topStories
+      }
+    }
+
+    case types.DISMISS_TOPSTORY: {
+      return {
+        ...state,
+        topStories: state.topStories.filter(story => story.id !== action.story.id),
+      }
+    }
 
     default:
       return state;
