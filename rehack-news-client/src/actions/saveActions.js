@@ -20,7 +20,8 @@ export function addSave(save) {
 export function createSave(save) {
   return function (dispatch) {
     return SavesApi.createSave(save).then(responseSave => {
-      console.log(`saving...${responseSave.id}`)
+      console.log(`SAVED...${responseSave.id}`)
+      console.log(responseSave)
       dispatch(addSave(responseSave));
       return responseSave;
     }).catch(error => {
@@ -35,7 +36,8 @@ export function deleteSaveSuccess(save) {
 export function deleteSave(save) {
   return function(dispatch) {
     return SavesApi.deleteSave(save).then(() => {
-      console.log(`deleteing...${save.id}`)
+      console.log(`DELETED...${save.id}`)
+      console.log(save)
       dispatch(deleteSaveSuccess(save));
       return;
     }).catch(error => {

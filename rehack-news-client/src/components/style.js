@@ -323,6 +323,11 @@ export const MoreButton = styled.div`
   }
 `;
 
+export const MoreLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+
 export const Loading = styled.div`
   background-color: #ffb74d;
   height: 2rem;

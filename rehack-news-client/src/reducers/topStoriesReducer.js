@@ -18,8 +18,6 @@ export default function topStoriesReducer(state = {
     }
 
     case types.FETCH_TOPSTORIES_FULFILLED: {
-    console.log("this is action.topStories from reducer:")
-    console.log(action.topStories)
       return {
         ...state,
         fetching: false,

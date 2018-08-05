@@ -27,7 +27,6 @@ export default function savesReducer(state = {
     }
 
     case types.ADD_SAVE: {
-      console.log(action.save)
       return {
         ...state,
         saves: [...state.saves, action.save],
@@ -35,7 +34,6 @@ export default function savesReducer(state = {
     }
 
     case types.DELETE_SAVE: {
-      console.log(action.save)
       return {
         ...state,
         saves: state.saves.filter(save => save.id !== action.save.id),

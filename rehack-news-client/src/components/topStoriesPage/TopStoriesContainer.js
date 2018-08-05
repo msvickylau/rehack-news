@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as saveActions from '../../actions/saveActions';
-import * as dismissActions from '../../actions/topStoriesActions';
+import * as courseActions from '../../actions/topStoriesActions';
 import TopStoriesList from './TopStoriesList'
-import { BodyStyle } from '../style';
+import { BodyStyle, Wrapper, MoreButton, MoreLink } from '../style';
 
 class TopStoriesContainer extends Component {
-  constructor(props, context) {
-    super(props, context);
-    console.log("from the container... WHY IS THIS EMPTY :(  ")
-    console.log(this.props.topStories)
+  constructor(props) {
+    super(props);
+
     this.state = {
       topStories: this.props.topStories,
     };
@@ -20,7 +19,7 @@ class TopStoriesContainer extends Component {
   }
 
   onDismiss(story) {
-    this.props.dismissActions.dismissStory(story);
+    this.props.courseActions.dismissStory(story);
   }
 
   saveStory(story) {
@@ -30,11 +29,26 @@ class TopStoriesContainer extends Component {
       url: story.url
     }
     this.props.saveActions.createSave(data);
-    this.props.dismissActions.dismissStory(story);
+    this.props.courseActions.dismissStory(story);
   }
 
 
   render() {
+    if (this.props.topStories.length === 0) {
+      return(
+        <BodyStyle>
+          <Wrapper>
+            Sorry there was an issue loading...
+          </Wrapper>
+          <MoreButton>
+            <MoreLink to="/topStories">
+            R E L O A D
+            </MoreLink>
+          </MoreButton>
+        </BodyStyle>
+      )
+    }
+
     return (
       <BodyStyle>
 
@@ -63,7 +77,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     saveActions: bindActionCreators(saveActions, dispatch),
-    dismissActions: bindActionCreators(dismissActions, dispatch)
+    courseActions: bindActionCreators(courseActions, dispatch)
   };
 }
 
