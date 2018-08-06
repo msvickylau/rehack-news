@@ -1,6 +1,6 @@
 # rehack-news
-
-rehack-news is a hackernews news client fetching
+rehack-news is a Hacker News client for searching Hacker News stories, viewing top stories and saving stories to read later.
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and uses a Rails API for saved stories.
 
 ## Usage
 To use this app
@@ -8,9 +8,9 @@ To use this app
 2. `cd rehack-news/rehack-news-api`
 3. run `bundle install`
 4. `rake db:migrate`
-5. `cd .. && cd rehack-news-client`
+5. `cd ../rehack-news-client`
 6. run `npm install`
-7. `cd .. && cd rehack-news-api`
+7. `cd ../rehack-news-api`
 8. `rake start`
 
 ## Contribution
@@ -25,6 +25,3 @@ Committing code is easy:
 
 ## License
 [rehack-news](https://github.com/vlaunyc/rehack-news/blob/master/LICENSE) is licensed under the [MIT license](http://opensource.org/licenses/MIT).
-
-## Other
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
