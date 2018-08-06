@@ -40,11 +40,11 @@ class TopStoriesContainer extends Component {
           <Wrapper>
             Sorry there was an issue loading...
           </Wrapper>
-          <MoreButton>
-            <MoreLink to="/topStories">
+          <MoreLink to="/topStories">
+            <MoreButton>
             R E L O A D
-            </MoreLink>
-          </MoreButton>
+            </MoreButton>
+          </MoreLink>
         </BodyStyle>
       )
     }
