@@ -1,5 +1,5 @@
 export const DEFAULT_QUERY = 'react';
-export const DEFAULT_HPP = '18';
+export const DEFAULT_HPP = '20';
 export const PATH_BASE = 'https://hn.algolia.com/api/v1';
 export const PATH_SEARCH = '/search';
 export const PARAM_SEARCH = 'query=';
