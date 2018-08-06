@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/saveActions';
 import Search from './Search';
 import Table from './Table';
-import axios from 'axios';
 import {
   DEFAULT_QUERY,
   DEFAULT_HPP,
@@ -37,7 +36,6 @@ class SearchContainer extends Component {
       searchTerm: DEFAULT_QUERY,
       error: null,
       isLoading: false,
-      saves: {}
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -87,19 +85,13 @@ class SearchContainer extends Component {
     });
   }
 
-  /*
-  Every additional fetch should fetch the next page by providing the second argument. The page argument uses the JavaScript ES6 default parameter to introduce the fallback to page 0 in case no defined page argument is provided for the function.
-
-  Axios takes the URL as argument and returns a promise. It wraps the result into a data object in JavaScript.
-
-  using catch block in the native fetch to store the error object in the local state by using setState(). everytime the API request is not sucessful, the catch block would be execuited.
-  */
   fetchSearchTopStories(searchTerm, page=0) {
     this.setState({ isLoading: true });
 
-    axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-      .then(result => this._isMounted && this.setSearchTopStories(result.data))
-      .catch(error => this._isMounted && this.setState({ error }));
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
+      .then(response => response.json())
+      .then(result => this.setSearchTopStories(result))
+      .catch(error => this.setState({ error }));
   }
 
   componentDidMount() {
@@ -212,7 +204,6 @@ class SearchContainer extends Component {
               onSave={this.saveStory}
             />
         }
-        {/* {console.log(stories)} */}
 
         <div className="interactions">
           { isLoading
@@ -237,7 +228,6 @@ function mapStateToProps(state, ownProps) {
     searchTerm: DEFAULT_QUERY,
     error: null,
     isLoading: false,
-    saves: {}
   };
 }
 
