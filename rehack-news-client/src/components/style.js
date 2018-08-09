@@ -253,22 +253,9 @@ export const HeartButton = styled(Button)`
   }
 `
 
-export const XButton = styled(Button)`
-  background-color: transparent;
-  height: 2rem;
-  width: 2rem;
-  min-width: 2rem;
-  max-width: 2rem;
-  line-height: 2rem;
-  border: transparent;
-  border-radius: 1rem;
-  align-items: center;
+export const XButton = styled(HeartButton)`
   color: #424242;
-  font-size: .8rem;
-  &:hover{
-    background-color: #f57c00;
-    color: #FFF;
-  }
+  margin-right: 0px;
 `
 
 /////////////////// Story Component ///////////////////
