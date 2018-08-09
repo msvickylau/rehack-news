@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import Button from './common/Button';
 import {  Link  } from 'react-router-dom';
 
+//////////////////////////////////////////////////////////////
+//       LOGIN
+//////////////////////////////////////////////////////////////
 export const LoginButton = styled.a`
   background-color: #ffb74d;
   line-height: 3rem;
@@ -19,7 +22,6 @@ export const LoginButton = styled.a`
 `;
 
 export const LoginWrapper = styled.div`
-/* border: 1px solid blue;  /* For debugging */
   align-items: center;
   background-color: transparent;
   display: flex;
@@ -29,8 +31,8 @@ export const LoginWrapper = styled.div`
   text-align: center;
   min-height: 100vh;
 `;
+
 export const LoginBkrd = styled.div`
-/* border: 1px solid red;  /* For debugging */
   background-color: white;
   height: 230px;
   min-width: 300px;
@@ -38,28 +40,9 @@ export const LoginBkrd = styled.div`
   border-bottom-right-radius: 0.25rem;
 `;
 
-export const StyledLink = styled(Link)`
-    text-decoration: none;
-    color: white;
-    float: right;
-    margin-left: 20px;
-    font-size: 1.2rem;
-
-    &:hover{
-      color: #eee;
-    }
-`;
-
-export const LogoStyledLink = styled(StyledLink)`
-  margin-left: 0px;
-  font-size: 1.8rem;
-`
-export const BodyStyle = styled.div`
-  background-color: #f5f5f5;
-  border-bottom-left-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-  font-size: 13px;
-`
+//////////////////////////////////////////////////////////////
+//       NavBar
+//////////////////////////////////////////////////////////////
 export const StyledNavBar = styled.div`
   background-color: #ff9800;
   display: flex;
@@ -80,11 +63,29 @@ export const Logo = styled.div`
   display: flex;
   flex-grow: 1;
   color: #fff;
-
   /* border: 2px solid pink;  /* For debugging */
 `;
 
-/////////////////// SEARCH ///////////////////
+export const LogoStyledLink = styled(StyledLink)`
+  margin-left: 0px;
+  font-size: 1.8rem;
+`
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  float: right;
+  margin-left: 20px;
+  font-size: 1.2rem;
+
+  &:hover{
+    color: #eee;
+  }
+`;
+
+//////////////////////////////////////////////////////////////
+//       SEARCH FORM
+//////////////////////////////////////////////////////////////
 export const StyledForm = styled.form`
   /*border: 2px solid pink;  /* For debugging */
   display: flex;
@@ -106,7 +107,6 @@ export const StyledInput = styled.input`
   border-top-left-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
   font-size: 13px;
-
   /* border: 1px solid blue;  /* For debugging */
 `;
 
@@ -127,8 +127,9 @@ export const SearchButton = styled.button`
   }
 `
 
-
-/////////////////// BAR ///////////////////
+//////////////////////////////////////////////////////////////
+//       MAIN BAR
+//////////////////////////////////////////////////////////////
 export const WrapperBar = styled.div`
   /* border: 1px solid red;  /* For debugging */
   display: flex;
@@ -178,8 +179,16 @@ export const StoryContainerBar = styled.div`
   text-align: left;
 `;
 
+//////////////////////////////////////////////////////////////
+//       MAIN BODY
+//////////////////////////////////////////////////////////////
+export const BodyStyle = styled.div`
+  background-color: #f5f5f5;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  font-size: 13px;
+`
 
-/////////////////// MAIN ///////////////////
 export const Wrapper = styled.div`
   /* border: 1px solid red;  /* For debugging */
   display: flex;
@@ -258,7 +267,9 @@ export const XButton = styled(HeartButton)`
   margin-right: 0px;
 `
 
-/////////////////// Story Component ///////////////////
+//////////////////////////////////////////////////////////////
+//       Story Component
+//////////////////////////////////////////////////////////////
 export const StoryContainer = styled.div`
   /* border: 1px solid blue;  /* For debugging */
   display: flex;
@@ -292,7 +303,9 @@ export const FooterLink = styled.a.attrs({
   text-decoration: none;
 `;
 
-/////////////////// FOOTER, ie: loading and more ///////////////////
+//////////////////////////////////////////////////////////////
+//    FOOTER, ie: loading and more
+//////////////////////////////////////////////////////////////
 export const MoreButton = styled.div`
   background-color: #ffb74d;
   height: 2rem;
