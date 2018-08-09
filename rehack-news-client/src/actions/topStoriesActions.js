@@ -2,17 +2,14 @@ import * as types from './actionTypes';
 import TopStoriesApi from '../api/TopStoriesApi';
 
 export function fetchTopStories() {
-  return function(dispatch) {
+  return (dispatch) => {
     dispatch({type: types.FETCH_TOPSTORIES});
 
-    return TopStoriesApi.fetchAllTopStories().then(topStories => {
-      console.log("in topStoriesActions printing topStories:")
-      console.log(topStories)
+    TopStoriesApi.fetchAllTopStories().then((topStories) => {
       dispatch({type: types.FETCH_TOPSTORIES_FULFILLED, topStories});
-
-    }).catch(error => {
+    }).catch((error) => {
       dispatch({type: types.FETCH_TOPSTORIES_REJECTED, error})
-    })
+    });
   };
 }
 

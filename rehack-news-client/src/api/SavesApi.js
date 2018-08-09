@@ -2,8 +2,8 @@ class SavesApi {
 
   static fetchAllSaves() {
     return fetch(`http://localhost:3001/api/v1/saves`)
-    .then(response => response.json())
-    .catch(error => error)
+    .then((response) => response.json())
+    .catch((error) => error)
   }
 
   static createSave(save) {
@@ -17,7 +17,7 @@ class SavesApi {
 
     return fetch(request).then(response => {
       return response.json();
-    }).catch(error => {
+    }).catch((error) => {
       return error;
     });
   }
@@ -29,10 +29,10 @@ class SavesApi {
 
     return fetch(request).then(response => {
       return response.json();
-    }).catch(error => {
+    }).catch((error) => {
       return error;
     });
-  }
+  };
 
 }
 export default SavesApi;
