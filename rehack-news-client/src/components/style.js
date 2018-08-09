@@ -66,11 +66,6 @@ export const Logo = styled.div`
   /* border: 2px solid pink;  /* For debugging */
 `;
 
-export const LogoStyledLink = styled(StyledLink)`
-  margin-left: 0px;
-  font-size: 1.8rem;
-`
-
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
@@ -82,6 +77,11 @@ export const StyledLink = styled(Link)`
     color: #eee;
   }
 `;
+
+export const LogoStyledLink = styled(StyledLink)`
+  margin-left: 0px;
+  font-size: 1.8rem;
+`
 
 //////////////////////////////////////////////////////////////
 //       SEARCH FORM
