@@ -1,11 +1,11 @@
 import * as types from '../actions/actionTypes';
 
 export default function savesReducer(state = {
-    saves: [],
-    fetching: false,
-    fetched: false,
-    error: null,
-  }, action) {
+  saves: [],
+  fetching: false,
+  fetched: false,
+  error: null,
+}, action) {
 
   switch(action.type) {
 

@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/saveActions';
 import SavesList from './SavesList'
-
-import {
-  BodyStyle
-} from '../style';
+import { BodyStyle } from '../style';
 
 class SavesContainer extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
+
     this.state = {
       saves: this.props.saves
     };

@@ -3,8 +3,8 @@ import saves from './savesReducer';
 import topStories from './topStoriesReducer';
 
 const rootReducer = combineReducers({
-  saves: saves,
-  topStories: topStories
+  saves,
+  topStories
 })
 
 export default rootReducer;

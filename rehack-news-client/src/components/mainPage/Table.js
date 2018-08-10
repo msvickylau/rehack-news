@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {
   WrapperBar,
   PointsContainerBar,
@@ -30,11 +29,10 @@ const Table = ({ stories, onDismiss, onSave }) =>
       <Wrapper key={item.objectID}>
         <PointsContainer>{item.points}</PointsContainer>
 
-        {/* <CommentsButton href={'/stories/' + item.objectID + '/comments'}> */}
         <CommentsButton
           target="_blank"
           href={'https://news.ycombinator.com/item?id=' + item.objectID }>
-            {item.num_comments}
+          {item.num_comments}
         </CommentsButton>
 
         <HeartButton onClick={() => onSave(item)}>
@@ -46,14 +44,12 @@ const Table = ({ stories, onDismiss, onSave }) =>
           <FooterLink href={item.url}>{item.url}</FooterLink>
         </StoryContainer>
 
-
         <XButton onClick={() => onDismiss(item.objectID)}>
           &#10006;
         </XButton>
 
       </Wrapper>
     )}
-
   </div>
 
 Table.propTypes = {

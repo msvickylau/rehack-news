@@ -33,7 +33,6 @@ export default function topStoriesReducer(state = {
       }
     }
 
-    default:
-      return state;
+    default: return state;
   }
 }
