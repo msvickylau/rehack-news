@@ -34,16 +34,12 @@ class TopStoriesContainer extends Component {
 
 
   render() {
-    if (this.props.topStories.length === 0) {
+    if (!this.props.topStories.length) {
       return(
         <BodyStyle>
-          <Wrapper>
-            Sorry there was an issue loading...
-          </Wrapper>
+          <Wrapper>Sorry there was an issue loading...</Wrapper>
           <MoreLink to="/topStories">
-            <MoreButton>
-            R E L O A D
-            </MoreButton>
+            <MoreButton> R E L O A D </MoreButton>
           </MoreLink>
         </BodyStyle>
       )

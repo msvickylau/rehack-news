@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/saveActions';
-import Search from './Search';
-import Table from './Table';
+import SearchForm from './SearchForm';
+import SearchList from './SearchList';
 import {
   DEFAULT_QUERY,
   DEFAULT_HPP,
@@ -187,33 +187,33 @@ class SearchContainer extends Component {
     return (
       <BodyStyle>
         <WrapperBar>
-          <Search
+          <SearchForm
             value={searchTerm}
             onChange={this.onSearchChange}
             onSubmit={this.onSearchSubmit}
           >
             <i className="fas fa-search"></i>
-          </Search>
+          </SearchForm>
         </WrapperBar>
 
         { error
           ? <Wrapper><p>SORRY! Something went wrong.</p></Wrapper>
-          : <Table
-              stories={stories}
-              onDismiss={this.onDismiss}
-              onSave={this.saveStory}
+          : <SearchList
+            stories={stories}
+            onDismiss={this.onDismiss}
+            onSave={this.saveStory}
             />
         }
 
         <div className="interactions">
           { isLoading
             ? <Loading>
-                L O A D I N G
-              </Loading>
+              L O A D I N G
+            </Loading>
             : <MoreButton
               onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
-                M O R E
-              </MoreButton>
+              M O R E
+            </MoreButton>
           }
         </div>
       </BodyStyle>

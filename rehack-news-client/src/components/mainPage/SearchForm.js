@@ -3,7 +3,7 @@ import { StyledInput, StyledForm, SearchButton } from '../style';
 
 // the 'this' object references the DOM node with the ref attribute.
 // focuses on the input feild when the component mounted.
-class Search extends Component {
+class SearchForm extends Component {
   componentDidMount() {
     if (this.input) {
       this.input.focus();
@@ -37,4 +37,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default SearchForm;

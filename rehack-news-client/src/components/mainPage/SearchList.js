@@ -16,7 +16,7 @@ import {
   HeartButton
 } from '../style';
 
-const Table = ({ stories, onDismiss, onSave }) =>
+const SearchList = ({ stories, onDismiss, onSave }) =>
   <div className="table">
     <WrapperBar>
       <PointsContainerBar>PTs</PointsContainerBar>
@@ -52,9 +52,9 @@ const Table = ({ stories, onDismiss, onSave }) =>
     )}
   </div>
 
-Table.propTypes = {
+SearchList.propTypes = {
   stories: PropTypes.array.isRequired,
   onDismiss: PropTypes.func.isRequired,
 };
 
-export default Table;
+export default SearchList;
