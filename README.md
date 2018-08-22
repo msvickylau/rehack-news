@@ -2,6 +2,8 @@
 rehack-news is a Hacker News client for searching Hacker News stories, viewing top stories and saving stories to read later.
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and uses a Rails API for saved stories.
 
+![hackernews_screenshots](https://user-images.githubusercontent.com/24817278/44478440-b36e4700-a60b-11e8-830f-d8ed7e42e3f3.jpg)
+
 ## Usage
 To use this app
 1. clone
