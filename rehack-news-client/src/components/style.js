@@ -151,6 +151,12 @@ export const NumberContainerBar = styled.div`
   vertical-align: middle;
   margin-right: 15px;
   font-weight: bold;
+
+  @media only screen and (max-width: 768px) {
+    {
+      margin-right: 5px;
+    }
+  }
 `;
 
 export const PointsContainerBar = styled(NumberContainerBar)`
@@ -178,6 +184,27 @@ export const StoryContainerBar = styled.div`
   font-weight: bold;
   text-align: left;
 `;
+
+export const StyledMostLikesButton = styled(Button)`
+  height: 1.3rem;
+  width: 3rem;
+  min-width: 3rem;
+  line-height: 1.3rem;
+  border-radius: 0.25rem;
+  font-size: 10px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 5em;
+  font-weight: bold;
+  background-color: #ffb74d;
+  outline: none;
+  border: none;
+
+  &:hover{
+    color: #eee;
+  }
+`
 
 //////////////////////////////////////////////////////////////
 //       MAIN BODY
@@ -211,6 +238,12 @@ export const NumberContainer = styled.div`
   text-align: center;
   vertical-align: middle;
   margin-right: 15px;
+
+  @media only screen and (max-width: 768px) {
+    {
+      margin-right: 5px;
+    }
+  }
 `;
 
 export const PointsContainer = styled(NumberContainer)`
@@ -234,6 +267,11 @@ export const CommentsButton = styled.a`
   text-decoration: none;
   &:hover{
     background-color: #f57c00;
+  }
+  @media only screen and (max-width: 768px) {
+    {
+      margin-right: 5px;
+    }
   }
 `;
 
@@ -260,11 +298,23 @@ export const HeartButton = styled(Button)`
     background-color: #f57c00;
     color: #FFF;
   }
+
+  @media only screen and (max-width: 768px) {
+    {
+      margin-right: 5px;
+    }
+  }
 `
 
 export const XButton = styled(HeartButton)`
   color: #424242;
   margin-right: 0px;
+`
+
+export const LikeButton = styled(HeartButton)`
+  width: 3rem;
+  min-width: 3rem;
+  max-width: 3rem;
 `
 
 //////////////////////////////////////////////////////////////
@@ -301,6 +351,11 @@ export const FooterLink = styled.a.attrs({
   color: #828282;
   font-size: .75em;
   text-decoration: none;
+  @media only screen and (max-width: 768px) {
+    {
+      font-size: 0em;
+    }
+  }
 `;
 
 //////////////////////////////////////////////////////////////

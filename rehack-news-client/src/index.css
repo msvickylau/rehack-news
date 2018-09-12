@@ -2,10 +2,15 @@ body {
   color: #424242;
   font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background-color: #424242;
-
-  /* border: 2px solid green;  /* For debugging */
-
   margin: 0 auto;
   padding: 0px 0px 40px;
   width: 75%;
+}
+
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 0px 0px 0px;
+    width: 100%;
+  }
 }
